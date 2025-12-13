@@ -18,7 +18,7 @@ class BlogsController extends Controller
             });
         }
         
-        return view('blogs', ['posts' => $posts, 'selectedCategory' => $category]);
+        return view('frontend.pages.blogs.index', ['posts' => $posts, 'selectedCategory' => $category]);
     }
 
     public function show(int $id)
@@ -29,7 +29,7 @@ class BlogsController extends Controller
             abort(404);
         }
 
-        return view('blog-detail', ['post' => $posts[$id], 'id' => $id]);
+        return view('frontend.pages.blogs.show', ['post' => $posts[$id], 'id' => $id]);
     }
 
     private function posts(): array
