@@ -1,0 +1,335 @@
+/* Import Louvre-style fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap');
+
+/* Navbar Museum - Louvre Style */
+.navbar-museum {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    color: #fff;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    font-family: 'Lato', 'Segoe UI', sans-serif;
+}
+
+.navbar-museum.navbar-hidden {
+    transform: translateY(-100%);
+}
+
+/* Top Bar */
+.navbar-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-left,
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.navbar-right {
+    justify-content: flex-end;
+}
+
+.navbar-center {
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+.navbar-logo {
+    text-decoration: none;
+}
+
+.navbar-logo h1 {
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin: 0;
+    color: #fff;
+    font-family: 'Gabriela', Georgia, serif;
+    text-transform: none;
+}
+
+.navbar-logo:hover {
+    text-decoration: none;
+}
+
+/* Navigation Buttons */
+.nav-search-btn,
+.nav-btn,
+.language-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+}
+
+.nav-search-btn:hover,
+.language-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Language Switcher */
+.language-switcher {
+    position: relative;
+}
+
+.language-btn {
+    padding: 0.6rem 1rem;
+}
+
+.language-btn .fa-chevron-down {
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+    transition: transform 0.3s ease;
+}
+
+.language-switcher.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.language-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.language-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-form {
+    padding: 0.5rem 0;
+}
+
+.language-option {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    background: none;
+    border: none;
+    text-align: left;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.9rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.language-option:hover {
+    background-color: #f5f5f5;
+}
+
+.language-option.active {
+    background-color: #00897B;
+    color: #fff;
+    font-weight: 600;
+}
+
+.language-option.active:hover {
+    background-color: #00695C;
+}
+
+.nav-btn-outline {
+    border: 1px solid #fff;
+}
+
+.nav-btn-outline:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.nav-btn-primary {
+    background-color: #00897B;
+    border: 1px solid #00897B;
+}
+
+.nav-btn-primary:hover {
+    background-color: #00695C;
+    border-color: #00695C;
+}
+
+/* Menu Bar */
+.navbar-menu-bar {
+    padding: 0 3rem;
+}
+
+.navbar-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+}
+
+.navbar-link {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 0;
+    transition: color 0.25s ease;
+    font-family: 'Lato', sans-serif;
+}
+
+.navbar-link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transform: translateX(-50%);
+    transition: width 0.25s ease;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+    color: #fff;
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+    width: 100%;
+}
+
+/* Search Overlay */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-overlay.active {
+    display: flex;
+}
+
+.search-container {
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+}
+
+.search-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.search-close:hover {
+    transform: rotate(90deg);
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.search-input {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    border: none;
+    font-size: 1.2rem;
+    outline: none;
+}
+
+.search-submit {
+    padding: 1.5rem 2rem;
+    background-color: #00897B;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-submit:hover {
+    background-color: #00695C;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-top-bar {
+        padding: 1rem 1.5rem;
+    }
+
+    .navbar-logo h1 {
+        font-size: 1.2rem;
+        letter-spacing: 0.2em;
+    }
+
+    .nav-btn span,
+    .nav-search-btn span {
+        display: none;
+    }
+
+    .navbar-menu-bar {
+        padding: 0 1.5rem;
+    }
+
+    .navbar-menu {
+        gap: 1.5rem;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .navbar-link {
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+}
+
+/* Add padding to body to account for fixed navbar */
+body {
+    padding-top: 140px;
+}

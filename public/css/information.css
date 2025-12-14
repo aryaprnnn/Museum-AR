@@ -1,0 +1,225 @@
+.info-page-wrapper {
+    padding-top: 80px;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.info-page-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.info-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.info-text h1 {
+    color: #000000;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+}
+
+.info-description p {
+    color: #333333;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.info-model {
+    min-height: 550px;
+    background: transparent;
+    border-radius: 15px;
+    overflow: visible;
+    box-shadow: none;
+    position: relative;
+}
+
+.model-viewer-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+model-viewer {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 550px !important;
+    display: block !important;
+}
+
+.ar-button {
+    position: absolute;
+    bottom: -60px;
+    right: 0;
+    padding: 12px 24px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.ar-button:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ar-button:active {
+    transform: translateY(-1px);
+}
+
+.ar-button i {
+    font-size: 1.1rem;
+}
+
+.back-button-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.btnkembali {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #000000;
+    transition: all 0.3s ease;
+}
+
+.btnkembali:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Progress bar for model loading */
+.progress-bar {
+    display: block;
+    width: 33%;
+    height: 10%;
+    max-height: 2%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 25px;
+    box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.progress-bar.hide {
+    visibility: hidden;
+    transition: visibility 0.3s;
+}
+
+.update-bar {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 0%;
+    height: 100%;
+    border-radius: 25px;
+    float: left;
+    transition: width 0.3s;
+}
+
+/* Desktop Layout */
+@media (min-width: 851px) {
+    .info-wrapper {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 60px;
+        align-items: stretch;
+        max-width: 1000px;
+    }
+
+    .info-text h1 {
+        font-size: 3rem;
+    }
+
+    .info-model {
+        min-height: 550px;
+    }
+
+    .model-viewer-container {
+        min-height: 550px;
+    }
+
+    model-viewer {
+        min-height: 550px !important;
+    }
+}
+
+/* Mobile Optimization */
+@media (max-width: 850px) {
+    .info-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-model {
+        order: 1;
+        min-height: 400px;
+        margin-bottom: 60px;
+    }
+
+    .model-viewer-container {
+        min-height: 400px;
+    }
+
+    model-viewer {
+        min-height: 400px !important;
+    }
+    
+    .info-text {
+        order: 2;
+    }
+    
+    .info-text h1 {
+        font-size: 2rem;
+    }
+
+    .ar-button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        bottom: -50px;
+        right: 0;
+    }
+
+    .ar-button i {
+        font-size: 0.95rem;
+    }
+}

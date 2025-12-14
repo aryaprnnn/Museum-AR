@@ -15,7 +15,7 @@ class InformationController extends Controller
         $otherItems = $items;
         unset($otherItems[$id]);
 
-        return view('information', compact('currentItem', 'otherItems'));
+        return view('frontend.pages.collections.index', compact('currentItem', 'otherItems'));
     }
 
     private function items(): array

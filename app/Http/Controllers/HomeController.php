@@ -16,6 +16,6 @@ class HomeController extends Controller
             'cta_judul' => "Sudah Siap untuk masuk ke Museum Virtualnya?"
         ];
 
-        return view('homepage', compact('konten'));
+        return view('frontend.homepage', compact('konten'));
     }
 }

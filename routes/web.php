@@ -7,10 +7,15 @@ use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\LanguageController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+// Collections (alias of search)
+Route::get('/collections', [SearchController::class, 'index'])->name('collections');
+Route::get('/collections/{id}', [InformationController::class, 'index'])->name('collections.show');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
@@ -21,3 +26,5 @@ Route::get('/information/{id?}', [InformationController::class, 'index'])->name(
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+
+Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');

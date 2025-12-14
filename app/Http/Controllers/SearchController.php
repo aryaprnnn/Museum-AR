@@ -20,6 +20,6 @@ class SearchController extends Controller
             9 => ['nama' => 'Placeholder', 'gambar' => 'img/placeholder.png'],
         ];
 
-        return view('searchsection', compact('items'));
+        return view('frontend.pages.collections.show', compact('items'));
     }
 }
