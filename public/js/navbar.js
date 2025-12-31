@@ -24,13 +24,20 @@ window.addEventListener('scroll', function() {
 
 // Set active link on page load
 window.addEventListener('load', () => {
-    const currentRoute = window.location.pathname.split('/').pop() || 'home';
-    const navLinks = document.querySelectorAll('.navbar-link');
-    
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href.includes(currentRoute) || (currentRoute === '' && href.includes('home'))) {
+    // Determine primary route segment: '/blogs/123' -> 'blogs'
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    const primaryRoute = pathSegments.length > 0 ? pathSegments[0] : 'home';
+
+    // Map empty path to 'home'
+    const routeKey = primaryRoute === '' ? 'home' : primaryRoute;
+
+    // Set active based on data-route attribute
+    document.querySelectorAll('.navbar-link').forEach(link => {
+        const linkRoute = link.getAttribute('data-route');
+        if (linkRoute === routeKey) {
             link.classList.add('active');
+        } else {
+            link.classList.remove('active');
         }
     });
 });

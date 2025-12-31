@@ -11,13 +11,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="{{ isset($mainClass) && str_contains($mainClass, 'light-bg') ? 'light-body' : '' }}">
 
     {{-- INCLUDE NAVBAR COMPONENT --}}
-    @include('frontend.partials.navbar')
+    @if(!isset($mainClass) || !str_contains($mainClass, 'hide-navbar'))
+        @include('front.partials.navbar')
+    @endif
 
     {{-- PAGE CONTENT --}}
-    <main class="main-content">
+    <main class="main-content {{ $mainClass ?? '' }}">
         {{ $slot }}
     </main>
 

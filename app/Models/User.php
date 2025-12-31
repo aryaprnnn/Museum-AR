@@ -21,7 +21,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'whatsapp',
+        'role',
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 
     /**
      * The attributes that should be hidden for serialization.

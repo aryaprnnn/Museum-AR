@@ -1,13 +1,20 @@
 .info-page-wrapper {
-    padding-top: 80px;
+    padding-top: 140px;
     min-height: 100vh;
-    background-color: #ffffff;
+    background-color: #ffffff !important;
+}
+
+/* Remove top padding when navbar is hidden */
+.hide-navbar .info-page-wrapper {
+    padding-top: 20px;
 }
 
 .info-page-main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 .info-wrapper {
@@ -72,10 +79,10 @@ model-viewer {
     bottom: -60px;
     right: 0;
     padding: 12px 24px;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     border: 2px solid #000000;
-    border-radius: 25px;
+    border-radius: 0;
     font-weight: bold;
     font-size: 0.95rem;
     cursor: pointer;
@@ -88,8 +95,8 @@ model-viewer {
 }
 
 .ar-button:hover {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #000000;
+    color: #ffffff;
     border: 2px solid #000000;
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -111,26 +118,27 @@ model-viewer {
 .btnkembali {
     display: inline-block;
     padding: 12px 30px;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     text-decoration: none;
-    border-radius: 25px;
+    border-radius: 50px;
     font-weight: bold;
     border: 2px solid #000000;
     transition: all 0.3s ease;
 }
 
 .btnkembali:hover {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #000000;
+    color: #ffffff;
     border: 2px solid #000000;
+    border-radius: 50px;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 /* Progress bar for model loading */
 .progress-bar {
-    display: block;
+    display: none !important;
     width: 33%;
     height: 10%;
     max-height: 2%;

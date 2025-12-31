@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -14,12 +15,13 @@ class ContactController extends Controller
 	public function send(Request $request)
 	{
 		$validated = $request->validate([
-			'name' => 'sometimes|string|max:255',
-			'email' => 'sometimes|email|max:255',
-			'message' => 'sometimes|string',
+			'name' => 'required|string|max:255',
+			'email' => 'required|email|max:255',
+			'message' => 'required|string|min:10',
 		]);
 
-		// In a real app you might mail or persist; here we just acknowledge the request.
-		return back()->with('status', 'Pesan berhasil dikirim.');
+		Contact::create($validated);
+
+		return back()->with('status', 'Pesan berhasil dikirim. Kami akan segera menghubungi Anda.');
 	}
 }

@@ -31,23 +31,24 @@ function initModelViewer(modelUrl, modelName) {
         });
 
         // AR support check
-        if (navigator.xr) {
-            navigator.xr.isSessionSupported('immersive-ar').then(supported => {
-                if (supported) {
-                    console.log('✓ AR is supported');
-                    arButton.style.opacity = '1';
-                    arButton.style.cursor = 'pointer';
-                } else {
-                    console.log('✗ AR not supported');
-                    arButton.style.opacity = '0.5';
-                    arButton.style.cursor = 'not-allowed';
-                    arButton.title = 'AR tidak tersedia di perangkat ini';
-                }
-            }).catch(err => {
-                console.log('AR check error:', err);
-            });
-        } else {
-            console.log('WebXR not available');
+        if (arButton) {
+            if (navigator.xr) {
+                navigator.xr.isSessionSupported('immersive-ar').then(supported => {
+                    if (supported) {
+                        console.log('✓ AR is supported');
+                        arButton.style.display = 'inline-flex';
+                    } else {
+                        console.log('✗ AR not supported - hiding AR button');
+                        arButton.style.display = 'none';
+                    }
+                }).catch(err => {
+                    console.log('AR check error:', err);
+                    arButton.style.display = 'none';
+                });
+            } else {
+                console.log('WebXR not available - hiding AR button');
+                arButton.style.display = 'none';
+            }
         }
     }
 

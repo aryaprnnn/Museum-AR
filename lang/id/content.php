@@ -57,9 +57,24 @@ return [
         'view_detail' => 'Lihat Detail',
     ],
     'how_to' => [
-        'heading' => 'Bagaimana Cara Menggunakannya?',
-        'item_title' => 'Timun Bersejarah',
-        'description' => 'Buka koleksi, putar model 3D, dan aktifkan AR untuk melihatnya di ruang Anda. Mudah dan imersif.',
+        'heading' => '🧭 Bagaimana Cara Menggunakan Museum Digital Ini?',
+        'item_title' => 'Historic Cucumber',
+        'description' => '<strong>Akses artefak sejarah secara mendalam dan bawa mereka ke dunia nyata Anda.</strong> Pengalaman museum kami dirancang untuk eksplorasi 3D yang sederhana dan imersif.
+
+<h4>1. 🖼️ Jelajahi Koleksi Kami</h4>
+<p>Klik tombol <strong>"Masuk Ke Museum"</strong> di bawah untuk mengakses galeri artefak digital 3D kami. Setiap objek, seperti Historic Cucumber yang langka ini, memiliki kisahnya sendiri untuk diungkap.</p>
+
+<h4>2. 💡 Interaksi 3D Penuh</h4>
+<p>Setelah memilih sebuah objek, Anda akan dibawa ke tampilan 3D.</p>
+<ul>
+    <li><strong>Rotasi:</strong> Gunakan mouse atau jari Anda untuk memutar model hingga 360° dan melihatnya dari setiap sudut.</li>
+    <li><strong>Zoom:</strong> Perbesar detail terkecil, seperti tekstur permukaan atau tanda-tanda sejarah, yang tidak mungkin terlihat pada foto datar.</li>
+</ul>
+
+<h4>3. ✨ Augmented Reality (AR)</h4>
+<p>Ingin tahu seberapa besar artefak ini di dunia nyata?</p>
+<p>Aktifkan fitur <strong>"Lihat dalam AR"</strong> untuk memproyeksikan model 3D langsung ke lingkungan Anda (misalnya di atas meja atau lantai ruang tamu Anda).</p>
+<p><em>Dapatkan pemahaman yang realistis tentang skala, konteks, dan penempatan objek sejarah. Ini adalah cara paling imersif untuk menghidupkan kembali museum!</em></p>',
         'cta' => 'Masuk Ke Museum',
     ],
     'cta' => [
@@ -94,14 +109,14 @@ return [
         'instagram' => '@museumvirtual',
         'email' => 'info@museumvirtual.com',
         'youtube' => 'Museum Virtual',
-        'ticket_title' => 'Pesan Tiket Kunjungan Virtual',
-        'ticket_description' => 'Ingin jadwalkan kunjungan virtual khusus? Hubungi kami via WhatsApp untuk reservasi dan info lebih lanjut.',
+        'ticket_title' => 'Pesan Tiket Kunjungan',
+        'ticket_description' => 'Ingin jadwalkan kunjungan? Hubungi kami via WhatsApp untuk reservasi dan info lebih lanjut.',
         'ticket_cta' => 'Pesan via WhatsApp',
     ],
     'blogs_page' => [
         'hero_title' => 'Blog & Artikel',
         'hero_subtitle' => 'Baca artikel menarik tentang sejarah dan koleksi kami',
-        'filter_label' => 'Filter Kategori:',
+        'filter_label' => 'Kategori:',
         'filters' => [
             'all' => 'Semua Kategori',
             'history' => 'Sejarah',
@@ -112,15 +127,52 @@ return [
         'read_more' => 'Baca Selengkapnya →',
     ],
     'blog_show' => [
-        'back' => '← Kembali ke Daftar Blog',
+        'back' => 'Kembali ke Daftar Blog',
     ],
     'collections_page' => [
         'hero_title' => 'Koleksi Kami',
         'hero_subtitle' => 'Jelajahi koleksi artefak bersejarah pilihan kami',
         'select_prompt' => 'Pilih salah satu benda untuk melihat lebih jelas!',
-        'enter' => 'Masuk ke Museum',
-        'back_home' => 'Kembali ←',
-        'back_to_collections' => '← Kembali ke Koleksi',
+        'enter' => 'Lihat Koleksi',
+        'back_home' => 'Kembali',
+        'back_to_collections' => 'Kembali ke Koleksi',
         'view_in_ar' => 'Lihat dengan AR',
+    ],
+    'ar_features' => [
+        'title' => 'Sejarah, Ditransformasi',
+        'subtitle' => 'Hidupkan artefak dengan 3D & AR',
+        'card_1_title' => 'Putar 360°',
+        'card_1_desc' => 'Putar model bebas untuk melihat dari setiap sudut.',
+        'card_2_title' => 'Teknologi AR',
+        'card_2_desc' => 'Letakkan artefak di ruangan Anda dan rasakan skala aslinya.',
+        'badge_featured' => 'Unggulan',
+        'card_3_title' => 'Zoom Detail',
+        'card_3_desc' => 'Perbesar tekstur dan tanda kecil dengan zoom detail tinggi.',
+        'card_4_title' => 'Cerita & Info',
+        'card_4_desc' => 'Baca cerita menarik di balik tiap artefak dan pelajari lebih jauh.',
+        'cta' => 'Mulai Jelajah Sekarang',
+    ],
+    'artclass_page' => [
+        'title' => 'Kelas Seni',
+        'kicker' => 'Program',
+        'subtitle' => 'Belajar teknik seni dengan instruktur ahli, dari sketsa dasar hingga karya siap pamer.',
+        'filter_all' => 'Semua',
+        'filter_beginner' => 'Pemula',
+        'filter_intermediate' => 'Menengah',
+        'filter_advanced' => 'Lanjutan',
+        'empty_title' => 'Belum ada kelas seni yang aktif',
+        'empty_message' => 'Program kelas seni akan segera dibuka',
+    ],
+    'program_preview' => [
+        'title' => 'Program Kami',
+        'subtitle' => 'Jelajahi berbagai program kami yang dirancang untuk menginspirasi kreativitas, menampilkan pameran luar biasa, dan memberikan pengalaman edukasi yang memperkaya untuk segala usia.',
+    ],
+    'artclass_preview' => [
+        'subtitle' => 'Habiskan sore yang menginspirasi di studio seni kami, ungkapkan kreativitas Anda dalam lingkungan yang ramah dan kolaboratif. Semua bahan disediakan, tidak perlu pengalaman.',
+        'cta' => 'Lihat Semua Kelas Seni',
+    ],
+    'exhibitions_preview' => [
+        'subtitle' => 'Masuki pameran bergantian yang menampilkan karya abadi dan suara kontemporer.',
+        'cta' => 'Lihat Semua Pameran',
     ],
 ];
