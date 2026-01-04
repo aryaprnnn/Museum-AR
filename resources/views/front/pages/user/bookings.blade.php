@@ -9,6 +9,11 @@
     @endif
 
     @if($artclassBookings->count() > 0)
+      <div style="margin-bottom: 20px; text-align: right;">
+          <a href="{{ route('user.tickets') }}" class="btn btn-outline-dark" style="border:1px solid #131010; padding: 8px 16px; border-radius: 6px; text-decoration: none; color: #ffffffff;">
+            <i class="fas fa-ticket-alt"></i> View My Exhibition Tickets
+          </a>
+      </div>
       <h2 style="font-size:1.4rem;margin-bottom:16px">Art Classes</h2>
       <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:40px">
         @foreach($artclassBookings as $booking)
@@ -24,11 +29,29 @@
             <div style="flex:1;">
               <h3 style="margin:0 0 6px 0;font-size:1.2rem">{{ $artClass->title ?? '-' }}</h3>
               <p style="margin:0;color:#666"><i class="fas fa-user"></i> {{ $booking->participant_name }}</p>
-              <p style="margin:0;color:#666"><i class="fas fa-ticket-alt"></i> {{ $booking->booking_code }}</p>
+              @if($booking->payment_status === 'paid')
+                <p style="margin:0;color:#666"><i class="fas fa-ticket-alt"></i> {{ $booking->booking_code }}</p>
+              @endif
               <p style="margin:0;color:#666"><i class="fas fa-calendar-alt"></i> {{ $artClass->schedule ?? '-' }}</p>
-              <p style="margin:0;color:#999;font-size:0.9rem;">Status: <strong>{{ ucfirst($booking->status) }}</strong></p>
+              <div style="margin-top: 8px;">
+                  @if($booking->payment_status === 'paid')
+                      <span style="background: #e6fff2; color: #1a7f4f; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; border: 1px solid #b2f5d6;">
+                          PAID
+                      </span>
+                  @elseif($booking->payment_status === 'pending')
+                      <span style="background: #fffbe6; color: #ad8b00; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; border: 1px solid #ffe58f;">
+                          WAITING FOR PAYMENT
+                      </span>
+                  @else
+                      <span style="background: #ffeef0; color: #cc1f1a; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; border: 1px solid #fcdbe0;">
+                          {{ strtoupper($booking->payment_status) }}
+                      </span>
+                  @endif
+              </div>
             </div>
-            <a href="{{ route('user.booking.detail', $booking->booking_code) }}" class="btn" style="margin:0;padding:8px 16px;font-size:0.9rem;white-space:nowrap;margin-left:16px;">View Detail</a>
+            @if($booking->payment_status === 'paid')
+              <a href="{{ route('user.booking.detail', $booking->booking_code) }}" class="btn" style="margin:0;padding:8px 16px;font-size:0.9rem;white-space:nowrap;margin-left:16px;">View Detail</a>
+            @endif
           </div>
         @endforeach
       </div>
@@ -48,13 +71,31 @@
           @endphp
           <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,0.05)">
             <div style="flex:1;">
-              <h3 style="margin:0 0 6px 0;font-size:1.2rem">{{ $program->title ?? '-' }}</h3>
+              <h3 style="margin:0 0 6px 0;font-size:1.2rem">{{ $program->title ?? 'Program Unavailable' }}</h3>
               <p style="margin:0;color:#666"><i class="fas fa-user"></i> {{ $booking->participant_name }}</p>
-              <p style="margin:0;color:#666"><i class="fas fa-ticket-alt"></i> {{ $booking->booking_code }}</p>
-              <p style="margin:0;color:#666"><i class="fas fa-calendar-alt"></i> {{ $program->schedule }} | <i class="fas fa-map-marker-alt"></i> {{ $program->location }}</p>
-              <p style="margin:0;color:#999;font-size:0.9rem;">Status: <strong>{{ ucfirst($booking->status) }}</strong></p>
+              @if($booking->payment_status === 'paid')
+                <p style="margin:0;color:#666"><i class="fas fa-ticket-alt"></i> {{ $booking->booking_code }}</p>
+              @endif
+              <p style="margin:0;color:#666"><i class="fas fa-calendar-alt"></i> {{ $program->schedule ?? '-' }} | <i class="fas fa-map-marker-alt"></i> {{ $program->location ?? '-' }}</p>
+              <div style="margin-top: 8px;">
+                  @if($booking->payment_status === 'paid')
+                      <span style="background: #e6fff2; color: #1a7f4f; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; border: 1px solid #b2f5d6;">
+                          PAID
+                      </span>
+                  @elseif($booking->payment_status === 'pending')
+                      <span style="background: #fffbe6; color: #ad8b00; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; border: 1px solid #ffe58f;">
+                          WAITING FOR PAYMENT
+                      </span>
+                  @else
+                      <span style="background: #ffeef0; color: #cc1f1a; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; border: 1px solid #fcdbe0;">
+                          {{ strtoupper($booking->payment_status) }}
+                      </span>
+                  @endif
+              </div>
             </div>
-            <a href="{{ route('user.educational.detail', $booking->booking_code) }}" class="btn" style="margin:0;padding:8px 16px;font-size:0.9rem;white-space:nowrap;margin-left:16px;">View Detail</a>
+            @if($booking->payment_status === 'paid')
+              <a href="{{ route('user.educational.detail', $booking->booking_code) }}" class="btn" style="margin:0;padding:8px 16px;font-size:0.9rem;white-space:nowrap;margin-left:16px;">View Detail</a>
+            @endif
           </div>
         @endforeach
       </div>

@@ -86,11 +86,11 @@
                 <i class="fas fa-lock"></i> Sudah Terdaftar
             </button>
           @elseif($isPending)
-            {{-- STATUS: SUDAH MENDAFTAR (HIJAU, BELUM BAYAR) --}}
-            <div style="margin-bottom:16px;padding:16px;background:#e6fff2;border:1px solid #b2f5d6;border-radius:8px;color:#1a7f4f;font-weight:600;">
-              <i class="fas fa-info-circle"></i> Anda sudah melakukan pendaftaran pada kelas ini. Silakan lanjutkan pembayaran untuk mengamankan kursi Anda.
+            {{-- STATUS: MENUNGGU PEMBAYARAN --}}
+            <div style="margin-bottom:16px;padding:16px;background:#fffbe6;border:1px solid #ffe58f;border-radius:8px;color:#ad8b00;font-weight:600; font-family: 'Inria Serif', serif;">
+              <i class="fas fa-hourglass-half" style="margin-right:8px;"></i> Pendaftaran sedang diproses, silakan selesaikan pembayaran Anda.
             </div>
-            <button id="pay-artclass-btn" class="btn program-btn">Lanjutkan Pembayaran</button>
+            <button id="pay-artclass-btn" class="btn program-btn" style="background:#000;color:#fff;border:none;">Lanjutkan Pembayaran</button>
           @elseif($sessionUser)
             {{-- STATUS: BELUM DAFTAR --}}
             <button id="pay-artclass-btn" class="btn program-btn">Bayar &amp; Daftar Sekarang</button>
@@ -114,8 +114,8 @@
                 };
                 const openSnap = (token) => {
                     window.snap.pay(token, {
-                        onSuccess: function(result) { window.location.href = "{{ url('/midtrans/artclass/finish') }}"; },
-                        onPending: function(result) { window.location.href = "{{ url('/midtrans/artclass/finish') }}"; },
+                        onSuccess: function(result) { window.location.href = "{{ url('/midtrans/artclass/finish') }}?order_id=" + result.order_id + "&status=" + result.transaction_status; },
+                        onPending: function(result) { window.location.href = "{{ url('/midtrans/artclass/finish') }}?order_id=" + result.order_id + "&status=" + result.transaction_status; },
                         onError: function(result) { alert("Terjadi kesalahan pembayaran."); resetButton(); },
                         onClose: function() { resetButton(); }
                     });
@@ -183,7 +183,7 @@
     .detail-card{
       display:flex;
       align-items:flex-start;
-      background:#fff;
+      background:#F0BB78;
       border-radius:14px;
       box-shadow:0 8px 32px rgba(0,0,0,0.13);
       padding:20px 18px;

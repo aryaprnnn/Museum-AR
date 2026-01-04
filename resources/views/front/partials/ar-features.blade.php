@@ -94,14 +94,15 @@
     color: #111111;
     margin-bottom: 15px;
     letter-spacing: -0.02em;
-    font-family: 'normal';
+    margin-bottom: 15px;
+    letter-spacing: -0.02em;
 }
 
 .ar-subtitle {
     font-size: 1.15rem;
     color: #4b5563;
     font-weight: 400;
-    font-family: 'normal';
+    font-weight: 400;
     letter-spacing: 0.02em;
 }
 
@@ -177,7 +178,7 @@
     font-weight: 700;
     color: #111111;
     margin-bottom: 15px;
-    font-family: 'Lato', sans-serif;
+    margin-bottom: 15px;
     transition: all 0.3s ease;
 }
 

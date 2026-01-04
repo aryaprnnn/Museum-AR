@@ -240,8 +240,16 @@ Route::get('/user/booking/{code}', function($code){
     return view('front.pages.user.booking-detail', compact('code'));
 })->name('user.booking.detail');
 Route::get('/user/educational/{code}', function($code){
-    return view('front.pages.user.educational-detail', compact('code'));
+    $booking = \App\Models\Booking::where('booking_code', $code)
+                ->with('bookable')
+                ->where('user_id', session('auth_user')['id'])
+                ->firstOrFail();
+    $program = $booking->bookable;
+    return view('front.pages.user.educational-detail', compact('code', 'booking', 'program'));
 })->name('user.educational.detail');
+
+Route::get('/user/tickets', [App\Http\Controllers\ExhibitionTicketController::class, 'index'])->name('user.tickets');
+Route::get('/user/tickets/{code}', [App\Http\Controllers\ExhibitionTicketController::class, 'show'])->name('user.tickets.show');
 
 // --- Booking / Join forms (require login) ---
 Route::get('/artclass/book', function(Request $request){

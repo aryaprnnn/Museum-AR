@@ -13,7 +13,8 @@ class Booking extends Model
         'user_id', 'bookable_type', 'bookable_id', 'booking_code',
         'participant_name', 'institution', 'experience_level',
         'payment_method', 'payment_status', 'status',
-        'event_date', 'reminder_sent_at', 'reminder_enabled'
+        'event_date', 'reminder_sent_at', 'reminder_enabled',
+        'quantity', 'total_price'
     ];
 
     protected $casts = [

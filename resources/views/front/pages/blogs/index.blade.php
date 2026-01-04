@@ -10,7 +10,7 @@
         </div>
     </section>
 
-    <section style="padding: 60px 20px; background-color: #ffffff;">
+    <section style="padding: 60px 20px; background-color: #FFF0DC;">
         <div class="container" style="max-width: 1200px; margin: 0 auto;">
             <!-- CATEGORY FILTER DROPDOWN -->
             <div class="filter-header">
@@ -43,7 +43,7 @@
                             <span class="blog-author">Museum AR</span>
                             <span class="blog-date">{{ optional($blog->created_at)->format('d M Y') }}</span>
                         </div>
-                        <p>{{ $blog->excerpt }}</p>
+                        <p>{{ \Illuminate\Support\Str::limit($blog->excerpt, 100) }}</p>
                         <a href="{{ route('blogs.show', $blog->id) }}" class="read-more">{{ __('content.blogs_page.read_more') }}</a>
                     </div>
                 </div>

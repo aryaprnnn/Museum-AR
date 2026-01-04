@@ -23,11 +23,11 @@
                     <td>{{ $ticket->phone }}</td>
                     <td>
                         <span class="badge 
-                            @if($ticket->status == 'paid') badge-success
+                            @if($ticket->status == 'paid' || $ticket->status == 'confirmed') badge-success
                             @elseif($ticket->status == 'pending') badge-warning
                             @else badge-secondary
                             @endif">
-                            {{ ucfirst($ticket->status) }}
+                            {{ ($ticket->status == 'paid' || $ticket->status == 'confirmed') ? 'Confirmed' : ucfirst($ticket->status) }}
                         </span>
                     </td>
                     <td>{{ $ticket->created_at->format('d M Y H:i') }}</td>

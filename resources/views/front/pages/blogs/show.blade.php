@@ -46,7 +46,7 @@
 
             <!-- BACK TO BLOGS BUTTON -->
             <div class="blog-back-button" style="margin-top: 60px; text-align: center;">
-                <a href="{{ route('blogs') }}" class="btn-back">{{ __('content.blog_show.back') }}</a>
+                <a href="{{ route('blogs') }}" class="btn-back">{{ __('content.blog_back') }}</a>
             </div>
         </div>
     </section>

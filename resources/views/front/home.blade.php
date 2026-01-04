@@ -16,6 +16,11 @@
                 >
                     <source src="{{ asset('video/museumV.mp4') }}" type="video/mp4">
                 </video>
+                
+                <div class="scroll-indicator">
+                    <p>Scroll to Explore</p>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
             </div>
         </div>
     </section>

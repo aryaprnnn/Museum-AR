@@ -204,7 +204,7 @@
             <p>We'll send you a reminder email closer to your event date. If you have any questions or need to make changes, please contact us.</p>
             
             <center>
-                <a href="{{ ($booking->bookable_type === \App\Models\ArtClass::class && isset($bookingDetails->slug)) ? route('artclass.detail', $bookingDetails->slug) : (($booking->bookable_type === \App\Models\EducationalProgram::class && isset($bookingDetails->slug)) ? route('programs.educational.detail', $bookingDetails->slug) : route('user.bookings', ['highlight' => $booking->booking_code])) }}" class="btn">
+                <a href="{{ ($booking->bookable_type === \App\Models\ArtClass::class && isset($bookingDetails->slug)) ? route('artclass.show', $bookingDetails->slug) : (($booking->bookable_type === \App\Models\EducationalProgram::class && isset($bookingDetails->slug)) ? route('educational-program.show', $bookingDetails->slug) : route('user.bookings', ['highlight' => $booking->booking_code])) }}" class="btn">
                     {{ (($booking->bookable_type === \App\Models\ArtClass::class && isset($bookingDetails->slug)) || ($booking->bookable_type === \App\Models\EducationalProgram::class && isset($bookingDetails->slug))) ? 'View Detail' : 'View My Bookings' }}
                 </a>
             </center>

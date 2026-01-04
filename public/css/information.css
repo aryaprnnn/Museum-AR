@@ -6,7 +6,11 @@
 
 /* Remove top padding when navbar is hidden */
 .hide-navbar .info-page-wrapper {
-    padding-top: 20px;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    width: 100%;
+    overflow: hidden;
+    /* Prevent margin collapse */
 }
 
 .info-page-main {
@@ -15,6 +19,10 @@
     padding: 40px 20px;
     background-color: #ffffff;
     color: #000000;
+}
+
+.hide-navbar .info-page-main {
+    padding-top: 0 !important;
 }
 
 .info-wrapper {
@@ -37,6 +45,7 @@
     color: #000000;
     font-size: 2.5rem;
     margin-bottom: 25px;
+    margin-top: 0;
 }
 
 .info-description p {
@@ -133,7 +142,7 @@ model-viewer {
     border: 2px solid #000000;
     border-radius: 50px;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Progress bar for model loading */
@@ -197,7 +206,7 @@ model-viewer {
     .info-wrapper {
         grid-template-columns: 1fr;
     }
-    
+
     .info-model {
         order: 1;
         min-height: 400px;
@@ -211,11 +220,11 @@ model-viewer {
     model-viewer {
         min-height: 400px !important;
     }
-    
+
     .info-text {
         order: 2;
     }
-    
+
     .info-text h1 {
         font-size: 2rem;
     }

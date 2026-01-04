@@ -11,9 +11,11 @@ return new class extends Migration
      */
    public function up()
 {
-    Schema::table('collections', function (Blueprint $table) {
-        $table->boolean('is_published')->default(0);
-    });
+    if (!Schema::hasColumn('collections', 'is_published')) {
+        Schema::table('collections', function (Blueprint $table) {
+            $table->boolean('is_published')->default(0);
+        });
+    }
 }
 
 

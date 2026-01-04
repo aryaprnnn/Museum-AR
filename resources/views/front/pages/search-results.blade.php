@@ -108,7 +108,7 @@
                                 <p style="color: #666; font-size: 0.9rem; margin: 10px 0;">{{ \Illuminate\Support\Str::limit($artClass->description, 80) }}</p>
                                 <small style="color: #999;">📍 {{ $artClass->level }} • 👨‍🏫 {{ $artClass->instructor }}</small>
                                 <br>
-                                <a href="{{ route('artclass.detail', $artClass->slug) }}" class="btn" style="margin-top: 10px; display: inline-block; padding: 8px 15px; font-size: 0.9rem;">{{ __('content.search.view_detail') }}</a>
+                                <a href="{{ route('artclass.show', $artClass->slug) }}" class="btn" style="margin-top: 10px; display: inline-block; padding: 8px 15px; font-size: 0.9rem;">{{ __('content.search.view_detail') }}</a>
                             </div>
                         </div>
                         @endforeach
@@ -133,7 +133,7 @@
                                 <p style="color: #666; font-size: 0.9rem; margin: 10px 0;">{{ \Illuminate\Support\Str::limit($program->description, 80) }}</p>
                                 <small style="color: #999;">📍 {{ $program->type }} • 👨‍🏫 {{ $program->facilitator }}</small>
                                 <br>
-                                <a href="{{ route('educational-program.detail', $program->slug) }}" class="btn" style="margin-top: 10px; display: inline-block; padding: 8px 15px; font-size: 0.9rem;">{{ __('content.search.view_detail') }}</a>
+                                <a href="{{ route('educational-program.show', $program->slug) }}" class="btn" style="margin-top: 10px; display: inline-block; padding: 8px 15px; font-size: 0.9rem;">{{ __('content.search.view_detail') }}</a>
                             </div>
                         </div>
                         @endforeach

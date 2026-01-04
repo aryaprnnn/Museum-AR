@@ -108,7 +108,19 @@
 
           @elseif($sessionUser)
             {{-- STATUS: BELUM DAFTAR --}}
-            <button id="pay-educlass-btn" class="btn program-btn">Bayar &amp; Daftar Sekarang</button>
+            
+            {{-- Quantity Input Section --}}
+            <div style="margin-bottom: 20px; padding: 15px; background: #fff; border: 1px solid #ddd; border-radius: 8px;">
+                <label style="font-weight: 600; margin-bottom: 8px; display: block;">Jumlah Tiket</label>
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <input type="number" id="ticket-quantity" value="1" min="1" max="10" style="width: 80px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem;">
+                    <div style="font-size: 1.1rem;">
+                        Total: <span style="font-weight: 700; color: #000;">Rp <span id="total-price-display">{{ number_format($program->price ?? 0, 0, ',', '.') }}</span></span>
+                    </div>
+                </div>
+                <button id="pay-educlass-btn" class="btn program-btn" style="width: 100%;">Bayar &amp; Daftar Sekarang</button>
+            </div>
+
           @else
             {{-- STATUS: BELUM LOGIN --}}
             <a href="{{ route('login') }}" class="btn program-btn">Login untuk Membayar</a>
@@ -130,13 +142,18 @@
                   const originalText = payBtn.innerHTML;
                   payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menghubungkan...';
 
+                  const qtyInput = document.getElementById('ticket-quantity');
+                  const qty = qtyInput ? qtyInput.value : 1;
+
                   fetch("{{ url('/educlass/'.$program->id.'/pay') }}", {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
                       'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    body: JSON.stringify({})
+                    body: JSON.stringify({
+                        quantity: qty
+                    })
                   })
                   .then(async res => {
                     if (!res.ok) {
@@ -153,8 +170,8 @@
                   .then(data => {
                     if(data && data.token) {
                       window.snap.pay(data.token, {
-                        onSuccess: function(result) { window.location.href = "{{ url('/midtrans/educlass/finish') }}"; },
-                        onPending: function(result) { window.location.href = "{{ url('/midtrans/educlass/finish') }}"; },
+                        onSuccess: function(result) { window.location.href = "{{ url('/midtrans/educlass/finish') }}?order_id=" + result.order_id + "&status=" + result.transaction_status; },
+                        onPending: function(result) { window.location.href = "{{ url('/midtrans/educlass/finish') }}?order_id=" + result.order_id + "&status=" + result.transaction_status; },
                         onError: function(result) { 
                           alert("Pembayaran gagal."); 
                           payBtn.disabled = false;
@@ -181,6 +198,22 @@
                   });
                 });
               }
+
+
+              // Logic Update Total Price
+              const qtyInput = document.getElementById('ticket-quantity');
+              const totalDisplay = document.getElementById('total-price-display');
+              const basePrice = {{ $program->price ?? 0 }};
+
+              if(qtyInput && totalDisplay) {
+                  qtyInput.addEventListener('input', function() {
+                      let qty = parseInt(this.value);
+                      if(!qty || qty < 1) qty = 1;
+                      
+                      const total = basePrice * qty;
+                      totalDisplay.innerText = new Intl.NumberFormat('id-ID').format(total);
+                  });
+              }
             });
           </script>
         @endif
@@ -206,7 +239,7 @@
     .detail-card{
       display:flex;
       align-items:flex-start;
-      background:#fff;
+      background:#F0BB78;
       border-radius:14px;
       box-shadow:0 8px 32px rgba(0,0,0,0.13);
       padding:20px 18px;

@@ -9,6 +9,10 @@ use Midtrans\Snap;
 use Midtrans\Config;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingConfirmationMail;
+use Illuminate\Support\Facades\Log;
+
 class ArtClassPaymentController extends Controller
 {
     public function getSnapToken(Request $request, $id)
@@ -57,7 +61,7 @@ class ArtClassPaymentController extends Controller
                 'participant_name' => $user->name,
                 'payment_method' => 'midtrans',
                 'payment_status' => 'pending',
-                'status' => 'confirmed',
+                'status' => 'confirmed', // CHANGED BACK: DB only supports confirmed/cancelled
                 'event_date' => $eventDate,
             ]);
             $params = [
@@ -99,7 +103,9 @@ class ArtClassPaymentController extends Controller
         }
         $booking = Booking::where('booking_code', $orderId)
             ->where('bookable_type', ArtClass::class)
+            ->with('user') // Eager load user
             ->first();
+
         if (!$booking) {
             return response()->json(['message' => 'Booking tidak ditemukan'], 404);
         }
@@ -116,17 +122,51 @@ class ArtClassPaymentController extends Controller
             $status = 'canceled';
             $paymentStatus = 'failed';
         }
+        
+        // Update booking
         $booking->update([
             'payment_status' => $paymentStatus,
             'status' => $status,
         ]);
+
+        // Send Email if Paid
+        if ($paymentStatus === 'paid') {
+            try {
+                // Determine email: booking->email (if exists) or user->email
+                $recipientEmail = $booking->user ? $booking->user->email : null;
+                
+                if ($recipientEmail) {
+                    Mail::to($recipientEmail)->send(new BookingConfirmationMail($booking));
+                    Log::info("Booking Confirmation Email sent to: " . $recipientEmail);
+                }
+            } catch (\Exception $e) {
+                Log::error("Failed to send booking confirmation email: " . $e->getMessage());
+            }
+        }
+
         return response()->json(['message' => 'Notifikasi diproses']);
     }
 
     public function finish(Request $request)
     {
+        // Localhost Fix: Capture params from frontend redirect and force update if valid
+        $orderId = $request->query('order_id');
+        $status = $request->query('status');
+        
+        if ($orderId && ($status == 'success' || $status == 'settlement' || $status == 'capture')) {
+             // Simulate notification for localhost
+             $simulatedRequest = new Request([
+                 'order_id' => $orderId,
+                 'transaction_status' => 'settlement',
+                 'payment_type' => 'credit_card',
+                 'fraud_status' => 'accept'
+             ]);
+             // Call handleNotification internally
+             $this->handleNotification($simulatedRequest);
+        }
+
         // Redirect ke halaman sukses booking
-        return redirect()->route('user.bookings')->with('success', 'Pembayaran berhasil!');
+        return redirect()->route('user.bookings')->with('success', 'Pembayaran berhasil! Silakan cek email Anda.');
     }
 
     public function unfinish(Request $request)

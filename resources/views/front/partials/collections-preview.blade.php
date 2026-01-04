@@ -10,10 +10,9 @@
             @forelse($collections as $item)
             <div class="collection-item">
                 <div class="collection-card">
-                    <div class="collection-image">
-                        <img src="{{ \Illuminate\Support\Str::startsWith($item['gambar'], ['http://', 'https://']) ? $item['gambar'] : asset('storage/'.$item['gambar']) }}" alt="{{ $item['nama'] }}">
-                        <div class="collection-overlay">
-                            <a href="{{ route('collections.show', $item['id']) }}" class="btn-view">{{ __('content.collections_preview.view_detail') }}</a>
+                    <div class="collection-image-wrapper">
+                        <div class="collection-image-inner">
+                            <img src="{{ \Illuminate\Support\Str::startsWith($item['gambar'], ['http://', 'https://']) ? $item['gambar'] : asset('storage/'.$item['gambar']) }}" alt="{{ $item['nama'] }}">
                         </div>
                     </div>
                     <h3>{{ $item['nama'] }}</h3>
@@ -33,4 +32,4 @@
 
 
 {{-- External JavaScript --}}
-<script src="{{ asset('js/collections-carousel.js') }}"></script>
+<script src="{{ asset('js/collections-carousel.js') }}?v=FINAL_V3"></script>

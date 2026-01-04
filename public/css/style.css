@@ -9,8 +9,22 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (min-width: 0px) {
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Inria Serif", serif;
+  }
+
+  .main-content {
+    flex: 1;
+    font-family: "Inria Serif", serif;
+  }
+}
+
 .light-body {
-  background-color: #ffffff;
+  background-color: #FFF0DC;
 }
 
 /* Terapkan box-sizing ke semua elemen */
@@ -27,7 +41,9 @@ h3 {
   /* Pakai font Serif untuk Judul, mirip di gambar */
   font-family: "Inria Serif", serif;
   /* <-- UDAH DIUBAH */
-  font-weight: normal;
+  font-weight: 700;
+  line-height: 1.5;
+  /* Fix clipping for Inria Serif */
 }
 
 h1 {
@@ -46,7 +62,7 @@ h3 {
 }
 
 p {
-  line-height: 1.3;
+  line-height: 1.5;
   font-size: 1.2rem;
 }
 
@@ -177,7 +193,7 @@ p {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: #FFF0DC;
   position: relative;
   overflow: hidden;
 }
@@ -729,10 +745,10 @@ footer {
 
 /* Styling Card Benda Museum */
 .museum-card {
-  border: 0px solid #000000;
+  border: 0px solid #131010;
   border-radius: 10px;
   padding: 20px;
-  background: #ffffff;
+  background: #F0BB78;
   box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: all 0.3s ease;
@@ -779,7 +795,6 @@ footer {
 }
 
 .museum-card h3 {
-  font-family: 'normal';
   font-size: 1.3rem;
   margin-bottom: 15px;
   color: #000000;
@@ -865,7 +880,7 @@ footer {
 
 /* Koleksi dan halaman lainnya - hapus padding-top */
 .page-content-wrapper {
-  background: #ffffff !important;
+  background-color: #FFF0DC;
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -876,7 +891,7 @@ footer {
   /* Padding Kiri/Kanan udah di-handle wrapper */
   padding: 20px 0 40px 0;
   flex-grow: 1;
-  background-color: #ffffff;
+  background-color: #FFF0DC;
   color: #000000;
 }
 
@@ -1039,7 +1054,7 @@ footer {
 }
 
 .main-content.light-bg {
-  background-color: #ffffff;
+  background-color: #FFF0DC
 }
 
 @media (max-width: 768px) {
@@ -1190,7 +1205,7 @@ body {
   color: #111111;
   font-size: 3.8rem;
   margin-bottom: 20px;
-  font-family: normal;
+  margin-bottom: 20px;
 }
 
 .about-content p {
@@ -1198,7 +1213,7 @@ body {
   font-size: 1.05rem;
   line-height: 1.8;
   margin-bottom: 24px;
-  font-family: 'normal';
+  margin-bottom: 24px;
 }
 
 .btn-about {
@@ -1211,7 +1226,6 @@ body {
   font-weight: 700;
   transition: all 0.3s ease;
   border: 2px solid #111111;
-  font-family: 'normal';
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
@@ -1501,7 +1515,8 @@ body {
 /* --- BLOGS PREVIEW SECTION --- */
 #blogs-preview {
   padding: 40px 0;
-  background-color: #ffffff;
+  background-color: #FFF0DC;
+  border-top: 1px solid #131010;
 }
 
 .section-header-top {
@@ -1514,13 +1529,13 @@ body {
   color: #000000;
   font-size: 5rem;
   margin-bottom: 15px;
-  font-family: 'normal';
+  margin-bottom: 15px;
 }
 
 .section-header-top p {
   color: #555555;
   font-size: 1.1rem;
-  font-family: 'normal';
+  font-size: 1.1rem;
 }
 
 #collections-preview .section-header-top h2 {
@@ -1551,17 +1566,16 @@ body {
 
 .blog-card-horizontal {
   flex: 0 0 380px;
-  background: white;
+  background: #F0BB78;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.493);
   transition: all 0.3s ease;
+  border: 2px solid #131010;
+  z-index: 999;
+
 }
 
-.blog-card-horizontal:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-}
 
 .blog-card-horizontal .blog-image {
   position: relative;
@@ -1608,22 +1622,26 @@ body {
 }
 
 .read-more {
-  color: #000000;
+  color: #ffffff !important;
   text-decoration: none;
   font-weight: bold;
   font-size: 0.9rem;
   transition: all 0.3s ease;
   display: inline-block;
-  padding: 0 !important;
-  margin-top: 0 !important;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
+  padding: 12px 24px;
+  margin-top: 15px;
+  border: 2px solid #F0BB78;
+  background-color: #131010;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .read-more:hover {
-  color: #333333;
-  margin-left: 5px;
+  background-color: #333333;
+  border-color: #333333;
+  color: #ffffff;
+  transform: translateY(-2px);
+  margin-left: 0;
 }
 
 .section-cta-blogs {
@@ -1641,14 +1659,15 @@ body {
 .collections-carousel-wrapper {
   margin-bottom: 40px;
   overflow: hidden;
+  /* Allow the carousel inside to scroll but keep wrapper as constraint if needed */
 }
 
 .collections-carousel {
   display: flex;
   gap: 25px;
-  overflow: hidden;
+  width: max-content;
   padding: 20px 0;
-  will-change: transform;
+  will-change: scroll-position;
 }
 
 .collection-item {
@@ -1656,87 +1675,81 @@ body {
 }
 
 .collection-card {
-  background: white;
-  border-radius: 15px;
+  background: #F0BB78;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   cursor: pointer;
-  height: 100%;
+  /* Remove fixed height to let aspect-ratio control it */
   display: flex;
   flex-direction: column;
+  padding: 15px;
 }
 
 .collection-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
 }
 
-.collection-image {
-  position: relative;
-  overflow: hidden;
-  height: 280px;
-}
-
-.collection-image img {
+/* 1:1 Square Wrapper */
+/* 1:1 Square Wrapper using Padding Hack */
+.collection-image-wrapper {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
+  padding-top: 100%;
+  /* Force 1:1 aspect ratio */
+  position: relative;
+  height: 0;
+  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
-.collection-card:hover .collection-image img {
-  transform: scale(1.15) rotate(2deg);
-}
-
-.collection-overlay {
+/* White box for the image - Absolute to cover the padding area */
+.collection-image-inner {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  overflow: hidden;
+  padding: 0;
 }
 
-.collection-card:hover .collection-overlay {
-  opacity: 1;
+.collection-image-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Crop to fill square */
+  object-position: center;
+  transition: transform 0.4s ease;
 }
 
-.btn-view {
-  background: #ffffff;
-  color: #000000;
-  padding: 12px 30px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  display: inline-block;
-  border: 2px solid #ffffff !important;
-  box-shadow: none !important;
-}
-
-.btn-view:hover {
-  background: #000000;
-  color: #ffffff;
-  border: 2px solid #ffffff !important;
+.collection-card:hover .collection-image-inner img {
   transform: scale(1.1);
 }
 
 .collection-card h3 {
-  color: #000000;
-  padding: 20px 20px;
+  font-family: "Inria Serif", serif;
+  font-size: 1.6rem;
+  color: #0d0d0d;
+  font-weight: 800;
+  /* Extra Bold */
+  margin: 0;
   text-align: center;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
+  margin-top: auto;
+  /* Push to bottom if space exists */
+  margin-bottom: auto;
+  padding-top: 5px;
+}
+
+/* Explicitly hide old elements if they exist */
+.collection-overlay,
+.btn-view {
+  display: none !important;
 }
 
 .section-cta-collections {
@@ -1751,7 +1764,8 @@ body {
   }
 
   .collection-item {
-    flex: 0 0 260px;
+    flex: 0 0 220px;
+    /* Reduced from 260px to fit better on small screens */
   }
 
   .section-header-top h2 {
@@ -1766,7 +1780,7 @@ body {
 
 .contact-info-section {
   padding: 80px 20px;
-  background-color: #ffffff;
+  background-color: #FFF0DC;
 }
 
 .map-container {
@@ -1905,7 +1919,7 @@ body {
 /* STORY SECTIONS FOR ABOUT PAGE */
 .about-content-section {
   padding: 80px 20px;
-  background-color: #ffffff;
+  background-color: #FFF0DC;
 }
 
 .story-section {
@@ -1986,11 +2000,12 @@ body {
   grid-template-columns: 250px 1fr;
   gap: 40px;
   align-items: center;
-  background: white;
+  background: #F0BB78;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  border: 3px solid #131010;
 }
 
 .achievement-item:hover {
@@ -2083,6 +2098,16 @@ body {
     margin-bottom: 40px;
   }
 
+  .story-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .story-section .story-image {
+    order: -1;
+  }
+
   .story-image {
     height: 250px;
   }
@@ -2140,9 +2165,7 @@ body {
   padding-top: 0;
 }
 
-.page-content-wrapper {
-  background-color: #ffffff !important;
-}
+
 
 .page-hero-image {
   position: relative;
@@ -2259,8 +2282,8 @@ body {
 }
 
 .blog-card {
-  background: white;
-  border-radius: 10px;
+  background: #F0BB78;
+  border: 2px solid #131010;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
   transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
@@ -2575,7 +2598,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 80px 20px;
-  background: #ffffff;
+  background: #FFF0DC;
 }
 
 .program-header {
@@ -2643,9 +2666,15 @@ body {
   gap: 24px;
 }
 
+@media (max-width: 768px) {
+  .program-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 .program-card {
-  background: #ffffff;
-  border: 1px solid #e6e6e6;
+  background: #F0BB78;
+  border: 3px solid #131010;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
@@ -2751,7 +2780,7 @@ body {
   line-height: 1.1;
   display: block;
   margin-bottom: 0;
-  font-family: 'normal';
+  margin-bottom: 0;
   font-style: normal;
 }
 
@@ -3019,7 +3048,7 @@ body {
   line-height: 1.1;
   display: block;
   margin: 0;
-  font-family: 'normal';
+  margin: 0;
   flex: 0 0 auto;
 }
 
@@ -3118,5 +3147,55 @@ body {
 
   .artclass-content h3 {
     font-size: 1.2rem;
+  }
+}
+
+/* --- Scroll Indicator Animation --- */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  z-index: 10;
+  opacity: 0.9;
+  animation: scrollBounce 2s infinite;
+  pointer-events: none;
+  /* Let clicks pass through */
+}
+
+.scroll-indicator p {
+  margin: 0;
+  font-family: "Inria Serif", serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-indicator i {
+  font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes scrollBounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+
+  60% {
+    transform: translateX(-50%) translateY(-5px);
   }
 }

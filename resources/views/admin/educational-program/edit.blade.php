@@ -21,6 +21,12 @@
             </div>
 
             <div class="form-group">
+                <label>Price * (Rp)</label>
+                <input type="number" name="price" class="form-control" value="{{ old('price', $educationalProgram->price) }}" required min="0">
+                @error('price') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="form-group">
                 <label>Facilitator</label>
                 <input type="text" name="facilitator" class="form-control" value="{{ old('facilitator', $educationalProgram->facilitator) }}">
                 @error('facilitator') <span class="text-danger">{{ $message }}</span> @enderror
@@ -28,7 +34,9 @@
 
             <div class="form-group">
                 <label>Schedule</label>
-                <input type="text" name="schedule" class="form-control" value="{{ old('schedule', $educationalProgram->schedule) }}" placeholder="e.g., 15 Januari 2025, 09:00 - 12:00">
+                <!-- Use datetime-local for calendar popup -->
+                <input type="datetime-local" name="schedule" class="form-control" value="{{ old('schedule', $educationalProgram->schedule) }}">
+                <small class="text-muted">Previous: {{ $educationalProgram->schedule }} (Update if needed)</small>
                 @error('schedule') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 

@@ -173,10 +173,10 @@
                 <a
                     href="{{
                         ($booking->bookable_type === \App\Models\ArtClass::class && isset($bookingDetails->slug))
-                            ? route('artclass.detail', $bookingDetails->slug)
+                            ? route('artclass.show', $bookingDetails->slug)
                             : (
                                 ($booking->bookable_type === \App\Models\EducationalProgram::class && isset($bookingDetails->slug))
-                                    ? route('programs.educational.detail', $bookingDetails->slug)
+                                    ? route('educational-program.show', $bookingDetails->slug)
                                     : route('user.bookings', ['highlight' => $booking->booking_code])
                               )
                     }}"

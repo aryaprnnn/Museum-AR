@@ -47,40 +47,64 @@ class ExhibitionPaymentController extends Controller
 
     public function getSnapToken(Request $request, $id)
     {
-        $exhibition = Exhibition::findOrFail($id);
-        $email = $request->input('email');
-        $phone = $request->input('phone');
-        if(!$email || !$phone) {
-            return response()->json(['error' => 'Email dan nomor HP wajib diisi'], 422);
-        }
+        try {
+            $exhibition = Exhibition::findOrFail($id);
+            $sessionUser = session('auth_user');
 
-        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = false;
+            if (!$sessionUser || !isset($sessionUser['id'])) {
+                return response()->json(['message' => 'User belum login.'], 401);
+            }
 
-        $orderId = 'EXH-' . $exhibition->id . '-' . time();
-        $params = [
-            'transaction_details' => [
+            $user = \App\Models\User::find($sessionUser['id']);
+            if (!$user) {
+                return response()->json(['message' => 'User tidak ditemukan.'], 401);
+            }
+
+            // Cek tiket duplikat
+            $existing = \App\Models\Ticket::where('user_id', $user->id)
+                ->where('exhibition_id', $exhibition->id)
+                ->orderByDesc('created_at')
+                ->first();
+
+            // Jika sudah ada tiket, redirect ke My Tickets
+            if ($existing) {
+                 return response()->json([
+                    'status' => 'success',
+                    'redirect_url' => route('user.tickets')
+                ]);
+            }
+
+            // Buat Tiket baru (Free)
+            $orderId = 'EXH-' . strtoupper(uniqid());
+            
+            $ticket = \App\Models\Ticket::create([
+                'user_id' => $user->id,
+                'exhibition_id' => $exhibition->id,
                 'order_id' => $orderId,
-                'gross_amount' => 50000, // ganti dengan harga tiket sebenarnya
-            ],
-            'customer_details' => [
-                'first_name' => 'Guest',
-                'email' => $email,
-                'phone' => $phone,
-            ],
-        ];
+                'email' => $user->email,
+                'phone' => $user->whatsapp ?? '-', // Fallback
+                'payment_method' => 'free',
+                'status' => 'paid', // Langsung paid
+                'snap_token' => null
+            ]);
 
-        $snapToken = Snap::getSnapToken($params);
+            // Kirim Email Konfirmasi
+            try {
+                \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\TicketConfirmationMail($ticket));
+            } catch (\Exception $e) {
+                \Log::error('Exhibition Email Error: ' . $e->getMessage());
+            }
 
-        \App\Models\Ticket::create([
-            'order_id' => $orderId,
-            'exhibition_id' => $exhibition->id,
-            'email' => $email,
-            'phone' => $phone,
-            'status' => 'pending',
-            'snap_token' => $snapToken,
-        ]);
+            return response()->json([
+                'status' => 'success',
+                'redirect_url' => route('user.tickets')
+            ]);
 
-        return response()->json(['token' => $snapToken]);
+        } catch (\Exception $e) {
+            \Log::error('Exhibition Ticket Error: ' . $e->getMessage());
+            return response()->json([
+                'message' => 'Gagal memproses tiket: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }

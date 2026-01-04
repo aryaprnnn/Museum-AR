@@ -6,12 +6,14 @@
     <title>{{ $title ?? 'Museum' }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body class="{{ isset($mainClass) && str_contains($mainClass, 'light-bg') ? 'light-body' : '' }}">
+<body class="{{ isset($mainClass) && str_contains($mainClass, 'light-bg') ? 'light-body' : '' }} {{ isset($mainClass) && str_contains($mainClass, 'hide-navbar') ? 'hide-navbar-body' : '' }}">
 
     {{-- INCLUDE NAVBAR COMPONENT --}}
     @if(!isset($mainClass) || !str_contains($mainClass, 'hide-navbar'))
@@ -24,9 +26,12 @@
     </main>
 
     {{-- FOOTER --}}
+    {{-- FOOTER --}}
+    @if(!isset($mainClass) || !str_contains($mainClass, 'hide-footer'))
     <footer>
         <p>&copy; {{ date('Y') }} ARtifact. All Rights Reserved.</p>
     </footer>
+    @endif
 
 </body>
 </html>

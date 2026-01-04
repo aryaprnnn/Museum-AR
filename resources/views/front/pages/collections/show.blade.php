@@ -1,4 +1,4 @@
-<x-layout title="{{ $currentItem->name }}" :mainClass="'light-bg hide-navbar'">
+<x-layout title="{{ $currentItem->name }}" :mainClass="'hide-navbar hide-footer'">
 
 <div class="info-page-wrapper">
     <main class="info-page-main">
