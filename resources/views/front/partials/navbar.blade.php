@@ -1,4 +1,6 @@
 {{-- TOP HORIZONTAL NAVIGATION - LOUVRE STYLE --}}
+{{-- External Stylesheet - Moved to top to prevent FOUC --}}
+<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 <nav class="navbar-museum" id="mainNavbar">
     <div class="navbar-top-bar">
         <div class="navbar-left">
@@ -58,7 +60,7 @@
                     PROGRAMS
                     <i class="fas fa-chevron-down dropdown-icon"></i>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" style="opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(-10px);">
                     <li><a href="{{ route('artclass') }}" class="dropdown-link">Art Class</a></li>
                     <li><a href="{{ route('exhibitions') }}" class="dropdown-link">Exhibitions</a></li>
                     <li><a href="{{ route('educational-program') }}" class="dropdown-link">Educational Program</a></li>
@@ -71,7 +73,7 @@
 </nav>
 
 {{-- SEARCH OVERLAY --}}
-<div class="search-overlay" id="searchOverlay">
+<div class="search-overlay" id="searchOverlay" style="visibility: hidden; opacity: 0; transform: translateY(100%);">
     <div class="search-container">
         <button class="search-close" onclick="toggleSearch()">
             <i class="fas fa-times"></i>
@@ -85,8 +87,7 @@
     </div>
 </div>
 
-{{-- External Stylesheet --}}
-<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+</div>
 
 {{-- External JavaScript --}}
 <script src="{{ asset('js/navbar.js') }}"></script>

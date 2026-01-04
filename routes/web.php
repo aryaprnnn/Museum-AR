@@ -56,6 +56,35 @@ Route::get('/collections/{id}', [InformationController::class, 'index'])->name('
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
+// Route specific for serving 3D models with correct CORS and MIME type
+Route::get('/storage/models/{filename}', function ($filename) {
+    $path = storage_path('app/public/collections/' . $filename);
+    
+    // Check known directories
+    if (!file_exists($path)) {
+       $path = storage_path('app/public/models/' . $filename);
+    }
+    if (!file_exists($path)) {
+       $path = storage_path('app/public/' . $filename);
+    }
+
+    if (!file_exists($path)) abort(404);
+
+    $file = \Illuminate\Support\Facades\File::get($path);
+    $type = \Illuminate\Support\Facades\File::mimeType($path);
+
+    // Force GLB mime type if not detected
+    if (str_ends_with(strtolower($filename), '.glb')) {
+        $type = 'model/gltf-binary';
+    }
+
+    $response = \Illuminate\Support\Facades\Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    $response->header("Access-Control-Allow-Origin", "*");
+    
+    return $response;
+});
+
 Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs');
 Route::get('/blogs/{id}', [BlogsController::class, 'show'])->name('blogs.show');
 

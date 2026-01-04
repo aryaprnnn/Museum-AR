@@ -24,7 +24,7 @@
 
     {{-- FOOTER --}}
     <footer>
-        <p>&copy; {{ date('Y') }} Museum Site. All Rights Reserved.</p>
+        <p>&copy; {{ date('Y') }} ARtifact. All Rights Reserved.</p>
     </footer>
 
 </body>

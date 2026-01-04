@@ -21,7 +21,7 @@
                         $modelUrl = $currentItem->model_3d
                             ? (\Illuminate\Support\Str::startsWith($currentItem->model_3d, ['http://', 'https://'])
                                 ? $currentItem->model_3d
-                                : asset('storage/'.$currentItem->model_3d))
+                                : request()->getSchemeAndHttpHost() . '/storage/models/' . basename($currentItem->model_3d))
                             : 'https://modelviewer.dev/shared-assets/models/Astronaut.glb';
                     @endphp
                     <model-viewer 

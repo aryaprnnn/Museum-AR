@@ -7,10 +7,14 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: #000;
+    background-color: #543a1473;
+    backdrop-filter: blur(50px) saturate(1%);
+    -webkit-backdrop-filter: blur(50px) saturate(1%);
     color: #fff;
     z-index: 1000;
     transition: transform 0.3s ease-in-out;
+    border-bottom: 1px solid #ffffffd3;
+    box-shadow: 0 2px 100px rgba(0, 0, 0, 0.432);
     font-family: 'Lato', 'Segoe UI', sans-serif;
 }
 
@@ -250,24 +254,30 @@
     left: 50%;
     transform: translateX(-50%);
     margin-top: 1rem;
-    background-color: #1a1a1a;
+    background-color: #543a14e3;
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     min-width: 200px;
     opacity: 0;
     visibility: hidden;
+    backdrop-filter: blur(50px) !important;
+    -webkit-backdrop-filter: blur(50px) !important;
     transform: translateX(-50%) translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 100;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
     list-style: none;
     padding: 0.5rem 0;
     margin-left: 0;
 }
 
 .navbar-dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    /* !important needed to override inline styles used for FOUC fix */
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
+    backdrop-filter: blur(50px) !important;
+    -webkit-backdrop-filter: blur(50px) !important;
+    transition: all 0.3s ease;
 }
 
 .dropdown-link {
@@ -284,6 +294,7 @@
 .dropdown-link:hover {
     background-color: rgba(255, 255, 255, 0.1);
     padding-left: 2rem;
+    transition: all 0.2s ease;
 }
 
 /* Search Overlay */
@@ -293,15 +304,28 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px) saturate(1%);
+    -webkit-backdrop-filter: blur(10px) saturate(1%);
+    background-color: #131010c7;
+    transition: all 0.5s ease;
     z-index: 2000;
-    display: none;
+
+    /* Animation State: Hidden */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100%);
+
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .search-overlay.active {
-    display: flex;
+    /* Animation State: Visible */
+    /* !important needed to override inline styles used for FOUC fix */
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .search-container {
@@ -329,13 +353,14 @@
 .search-form {
     display: flex;
     align-items: center;
-    background-color: #fff;
+    background-color: #ffffff60;
     border-radius: 50px;
     overflow: hidden;
 }
 
 .search-input {
     flex: 1;
+    background-color: #ffffff7a;
     padding: 1.5rem 2rem;
     border: none;
     font-size: 1.2rem;
@@ -344,7 +369,7 @@
 
 .search-submit {
     padding: 1.5rem 2rem;
-    background-color: #00897B;
+    background-color: #13101081;
     border: none;
     color: #fff;
     font-size: 1.5rem;
@@ -353,13 +378,28 @@
 }
 
 .search-submit:hover {
-    background-color: #00695C;
+    background-color: #332b2b;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .navbar-top-bar {
-        padding: 1rem 1.5rem;
+        padding: 1rem 0.5rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .navbar-center {
+        order: -1;
+        flex: 0 0 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .navbar-left,
+    .navbar-right {
+        flex: 1;
+        justify-content: center;
     }
 
     .navbar-logo h1 {
@@ -378,13 +418,25 @@
 
     .navbar-menu {
         gap: 1.5rem;
-        overflow-x: auto;
-        justify-content: flex-start;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
     }
 
     .navbar-link {
         font-size: 0.8rem;
         white-space: nowrap;
+    }
+
+    /* Fix Search Overlay on Mobile */
+    .search-input {
+        padding: 1rem 1rem;
+        font-size: 1rem;
+    }
+
+    .search-submit {
+        padding: 1rem 1.2rem;
+        font-size: 1.2rem;
     }
 }
 

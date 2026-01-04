@@ -116,11 +116,14 @@
     align-items: center;
     justify-content: center;
     padding: 30px;
-    transition: background 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 .program-card:hover .program-overlay {
     background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px) saturate(1%);
+    -webkit-backdrop-filter: blur(10px) saturate(1%);
+    transition: all 0.5s ease;
 }
 
 .program-text {
@@ -172,7 +175,16 @@
     }
     
     .program-text h3 {
-        font-size: 1.8rem;
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    .eyebrow {
+        font-size: 2.5rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
     }
 }
 </style>

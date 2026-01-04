@@ -30,44 +30,7 @@
     </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.getElementById('collectionsCarousel');
-    const itemCount = parseInt(carousel.dataset.itemCount) || 0;
-    
-    // Clone items untuk seamless looping
-    if (itemCount > 0) {
-        const items = carousel.querySelectorAll('.collection-item');
-        items.forEach(item => {
-            const clone = item.cloneNode(true);
-            carousel.appendChild(clone);
-        });
-        
-        // Set animation dynamically
-        const totalWidth = (300 * itemCount) + (25 * itemCount);
-        const style = document.createElement('style');
-        style.textContent = `
-            .collections-carousel {
-                animation: scrollLeft 35s linear infinite !important;
-            }
-            
-            @keyframes scrollLeft {
-                0% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(-${totalWidth}px);
-                }
-            }
-            
-            .collections-carousel-wrapper:hover .collections-carousel {
-                animation-play-state: paused !important;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-});
-</script>
+
 
 {{-- External JavaScript --}}
 <script src="{{ asset('js/collections-carousel.js') }}"></script>

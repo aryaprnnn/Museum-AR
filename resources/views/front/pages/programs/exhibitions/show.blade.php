@@ -90,12 +90,14 @@
           </div>
           <style>
             @keyframes fadeIn {from{opacity:0}to{opacity:1}}
-            #ticket-modal {animation:fadeIn 0.3s;}
+            #ticket-modal {animation:fadeIn 0.3s; backdrop-filter: blur(20px) saturate(1%) brightness(0.3); background-color: #131010c2;}
             .modal-content {
-              background: linear-gradient(135deg,#f8fafc 0%,#e0e7ff 100%);
+              background: #FFF0DC;
               padding: 36px 28px 28px 28px;
               border-radius: 18px;
               box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+              backdrop-filter: blur(20px);
+              -webkit-backdrop-filter: blur(20px);
               max-width: 370px;
               width: 100%;
               position: relative;
@@ -104,15 +106,16 @@
               align-items: stretch;
               gap: 0;
               animation: fadeIn 0.3s;
+              border: 1px solid #131010;
             }
             .modal-close {
               position: absolute;
               top: 14px;
               right: 16px;
-              background: #e0e7ff;
+              background: #FFF0DC;
               border: none;
               font-size: 2rem;
-              color: #6366f1;
+              color: #131010;
               cursor: pointer;
               border-radius: 50%;
               width: 36px;
@@ -120,14 +123,14 @@
               transition: background 0.2s;
             }
             .modal-close:hover {
-              background: #6366f1;
-              color: #fff;
+              background: #131010;
+              color: #FFF0DC;
             }
             .modal-title {
               margin-bottom: 18px;
               text-align: center;
-              font-size: 1.35rem;
-              color: #3730a3;
+              font-size: 2rem;
+              color: #131010;
               font-weight: 600;
             }
             .modal-form {
@@ -143,7 +146,7 @@
             }
             .modal-field label {
               font-size: 0.98rem;
-              color: #6366f1;
+              color: #131010;
               font-weight: 500;
               margin-bottom: 2px;
             }
@@ -162,8 +165,8 @@
             .modal-btn {
               width: 100%;
               margin-top: 10px;
-              background: linear-gradient(90deg,#6366f1 0%,#3730a3 100%) !important;
-              color: #fff !important;
+              background: #131010;
+              color: #131010;
               font-size: 1.1rem;
               font-weight: 600;
               border-radius: 8px;
@@ -172,8 +175,8 @@
               transition: background 0.2s, color 0.2s, transform 0.2s;
             }
             .modal-btn:hover {
-              background: linear-gradient(90deg,#3730a3 0%,#6366f1 100%) !important;
-              color: #fff !important;
+              background: #543A14;
+              color: #fff;
               transform: scale(1.04);
             }
           </style>
@@ -252,9 +255,9 @@
     .back-btn:hover{background:#000;color:#fff;border-color:#000}
 
     /* Banner full width */
-    .exhibition-banner{width:100%;min-height:130px;background-size:cover;background-position:center;margin-top:40px}
+    .exhibition-banner{width:100%;min-height:130px;background-size:cover;background-position:center;margin-top:40px filter: blur(20px)}
     .exhibition-banner-overlay{background:linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);width:100%;height:100%}
-    .exhibition-banner-content{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:40px 24px}
+    .exhibition-banner-content{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:40px 24px;}
     .banner-text{margin:0;color:#fff;font-size:2rem;font-weight:500}
     .ticket-btn{background-color: #fff !important; color: #000; border: none; padding:8px 70px;font-size:1.5rem;border-radius:8px;transition:transform 0.3s ease, background-color 0.3s ease, color 0.3s ease}
     .ticket-btn:hover{border: none; background: #000 !important; color: #fff;transform:scale(1.08)}

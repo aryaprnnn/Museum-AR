@@ -3,7 +3,7 @@
 <div class="search-page-wrapper">
     <!-- HERO SECTION -->
     <section class="page-hero-image">
-        <img src="{{ asset('img/gap.jpg') }}" alt="Search">
+        <img src="{{ asset('img/search.png') }}" alt="Search">
         <div class="hero-overlay"></div>
         <div class="hero-text-content">
             <h1>{{ __('content.search.title') }}</h1>

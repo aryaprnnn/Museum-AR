@@ -56,10 +56,11 @@
 
 <style>
 #ar-features {
-    background: #ffffff;
+    background: #FFF0DC;
     padding: 100px 40px;
     position: relative;
     overflow: hidden;
+    border-bottom: 2px solid #131010;
 }
 
 #ar-features::before {
@@ -112,7 +113,7 @@
 }
 
 .feature-card {
-    background: #f9fafb;
+    background: #F0BB78;
     border: 1px solid #e5e7eb;
     border-radius: 16px;
     padding: 40px 30px;
@@ -125,13 +126,13 @@
 
 .feature-card:hover {
     transform: translateY(-12px) scale(1.02);
-    background: #ffffff;
+    background: #e6dbceff;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
-    border-color: #d1d5db;
+    border-color: #868686ff;
 }
 
 .feature-card.featured {
-    background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+    background: linear-gradient(145deg, #f3f4f6, #f5dcbcff);
     border: 2px solid #d1d5db;
     transform: scale(1.03);
 }
@@ -231,7 +232,7 @@
     align-items: center;
     gap: 12px;
     padding: 18px 40px;
-    background: #111111;
+    background: #131010;
     color: #ffffff;
     border: none;
     border-radius: 50px;
