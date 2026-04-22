@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Admin' }} - ARtifact Museum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 <body>
-    <div class="sidebar collapsed" id="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
+            <button class="sidebar-toggle" onclick="toggleSidebar()" style="margin-right: 10px;"><i class="fas fa-angle-left"></i></button>
             <div style="display:flex;align-items:center;gap:10px;flex:1">
                 <i class="fas fa-museum"></i>
                 <span>Admin Panel</span>
             </div>
-            <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fas fa-angle-left"></i></button>
         </div>
         <ul class="sidebar-menu">
             <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fas fa-th-large"></i> Dashboard</a></li>
@@ -37,14 +42,17 @@
     </div>
     <div class="main-content" id="mainContent">
         <div class="top-bar">
-            <h1>{{ $title ?? 'Dashboard' }}</h1>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <h1>{{ $title ?? 'Dashboard' }}</h1>
+            </div>
             <div class="top-bar-controls">
                 <span>Welcome, {{ session('admin')['name'] ?? 'Admin' }}</span>
-                <button class="sidebar-toggle" onclick="toggleSidebar()" style="padding:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#f0f0f0;border-radius:4px"><i class="fas fa-bars"></i></button>
             </div>
         </div>
         {{ $slot }}
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('js/admin.js') }}" defer></script>
 </body>
 </html>

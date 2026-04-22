@@ -14,7 +14,7 @@
                 <img src="{{ asset('img/1.jpg') }}" alt="Museum 3">
             </div>
             <div class="carousel-slide">
-                <img src="{{ asset('img/3.png') }}" alt="Museum 4">
+                <img src="{{ asset('img/3.jpg') }}" alt="Museum 4">
             </div>
         </div>
         <div class="carousel-indicators">

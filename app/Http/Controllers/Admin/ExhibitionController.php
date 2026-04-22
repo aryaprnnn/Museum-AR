@@ -31,11 +31,17 @@ class ExhibitionController extends Controller
             'curator' => 'nullable',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
-            'time' => 'nullable',
+            // 'time' => 'nullable',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'location' => 'nullable',
             'status' => 'required|in:ongoing,upcoming,past',
             'image' => 'nullable|image'
         ]);
+
+        $time = $data['start_time'] . ' - ' . $data['end_time'];
+        unset($data['start_time'], $data['end_time']);
+        $data['time'] = $time;
 
         $data['is_active'] = $request->has('is_active');
 
@@ -63,11 +69,17 @@ class ExhibitionController extends Controller
             'curator' => 'nullable',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
-            'time' => 'nullable',
+            // 'time' => 'nullable',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'location' => 'nullable',
             'status' => 'required|in:ongoing,upcoming,past',
             'image' => 'nullable|image'
         ]);
+
+        $time = $data['start_time'] . ' - ' . $data['end_time'];
+        unset($data['start_time'], $data['end_time']);
+        $data['time'] = $time;
 
         $data['is_active'] = $request->has('is_active');
 

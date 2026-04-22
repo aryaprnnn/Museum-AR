@@ -8,15 +8,23 @@
       <div style="display:grid;gap:16px;margin-bottom:24px">
         <div>
           <h3 style="margin:0 0 6px 0;color:#555;font-size:0.95rem">Nama Kelas</h3>
-          <p style="margin:0;font-size:1.2rem;font-weight:600">Sketsa Dasar</p>
+          <p style="margin:0;font-size:1.2rem;font-weight:600">{{ $booking->bookable->title }}</p>
+        </div>
+        <div>
+          <h3 style="margin:0 0 6px 0;color:#555;font-size:0.95rem">Nama Peserta</h3>
+          <p style="margin:0;font-size:1.1rem">{{ $booking->participant_name }}</p>
         </div>
         <div>
           <h3 style="margin:0 0 6px 0;color:#555;font-size:0.95rem">Tanggal & Waktu</h3>
-          <p style="margin:0"><i class="fas fa-calendar-alt"></i> 20 Jan 2025, 10:00 - 12:00 WIB</p>
+          <p style="margin:0"><i class="fas fa-calendar-alt"></i> {{ $booking->bookable->schedule ?? 'Jadwal Menyusul' }}</p>
+        </div>
+        <div>
+          <h3 style="margin:0 0 6px 0;color:#555;font-size:0.95rem">Total Harga</h3>
+          <p style="margin:0;font-weight:bold">IDR {{ number_format($booking->bookable->price, 0, ',', '.') }}</p>
         </div>
         <div>
           <h3 style="margin:0 0 6px 0;color:#555;font-size:0.95rem">Booking Code</h3>
-          <p style="margin:0;font-family:monospace;font-size:1.1rem;color:#2196F3">{{ $code }}</p>
+          <p style="margin:0;font-family:monospace;font-size:1.1rem;color:#2196F3">{{ $booking->booking_code }}</p>
         </div>
       </div>
 

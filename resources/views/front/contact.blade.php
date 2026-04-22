@@ -26,7 +26,7 @@
             <div class="social-media-section">
                 <h2 style="text-align: center; color: #543A14; margin-bottom: 30px;">{{ __('content.contact_page.follow_us') }}</h2>
                 <div class="social-links">
-                    <a href="https://instagram.com/museumvirtual" target="_blank" class="social-link instagram">
+                    <a href="https://www.instagram.com/aristyo_2006/" target="_blank" class="social-link instagram">
                         <i class="fab fa-instagram"></i>
                         <span>{{ __('content.contact_page.instagram') }}</span>
                     </a>
@@ -48,10 +48,17 @@
                         <h3>{{ __('content.contact_page.ticket_title') }}</h3>
                         <p>{{ __('content.contact_page.ticket_description') }}</p>
                     </div>
-                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20memesan%20tiket%20kunjungan%20virtual" target="_blank" class="btn-whatsapp">
-                        <i class="fab fa-whatsapp"></i>
-                        {{ __('content.contact_page.ticket_cta') }}
-                    </a>
+                    @if(session('auth_user'))
+                        <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20memesan%20tiket%20kunjungan%20virtual" target="_blank" class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            {{ __('content.contact_page.ticket_cta') }}
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-whatsapp" style="background-color: #666; cursor: not-allowed; opacity: 0.8;">
+                            <i class="fas fa-lock"></i>
+                            Login to Book
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

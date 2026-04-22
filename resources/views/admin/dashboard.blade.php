@@ -1,5 +1,5 @@
 <x-admin-layout title="Dashboard">
-    <div class="stats-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:32px;margin-bottom:36px;">
+    <div class="stats-grid">
         <div class="stat-card">
             <h3>Total Blogs</h3>
             <p>{{ \App\Models\Blog::count() }}</p>
@@ -46,8 +46,7 @@
             color: #111;
             margin: 0;
         }
-        @media(max-width:900px){.stats-grid{grid-template-columns:1fr 1fr;}}
-        @media(max-width:600px){.stats-grid{grid-template-columns:1fr;}}
+
     </style>
 
     <div class="card">

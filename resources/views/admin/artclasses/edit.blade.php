@@ -27,10 +27,66 @@
                 @error('instructor') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            @php
+                $schedule = old('schedule', $artClass->schedule);
+                $day = '';
+                $startTime = '';
+                $endTime = '';
+                
+                // Parse existing schedule string: "Minggu, 13:00 - 15:00 WIB"
+                if ($schedule) {
+                    $parts = explode(', ', $schedule);
+                    if (count($parts) >= 1) {
+                        $day = $parts[0];
+                        if (count($parts) > 1) {
+                            $timeString = str_replace(' WIB', '', $parts[1]);
+                            $times = explode(' - ', $timeString);
+                            if (count($times) >= 2) {
+                                $startTime = trim($times[0]);
+                                $endTime = trim($times[1]);
+                            }
+                        }
+                    }
+                }
+                
+                // Override with old input if validation failed
+                if(old('day')) $day = old('day');
+                if(old('start_time')) $startTime = old('start_time');
+                if(old('end_time')) $endTime = old('end_time');
+            @endphp
+
             <div class="form-group">
-                <label>Schedule</label>
-                <input type="text" name="schedule" class="form-control" value="{{ old('schedule', $artClass->schedule) }}" placeholder="e.g., Every Saturday 10:00 - 12:00">
-                @error('schedule') <span class="text-danger">{{ $message }}</span> @enderror
+                <label style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: block;">Schedule</label>
+                
+                <div class="row">
+                    <!-- Day Section -->
+                    <div class="col-md-12 mb-3">
+                        <label class="text-muted" style="font-weight: 500; margin-bottom: 5px; display: block;">Day</label>
+                        <select name="day" class="form-control" required style="height: 45px;">
+                            <option value="">Select Day</option>
+                            @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $d)
+                                <option value="{{ $d }}" {{ $day == $d ? 'selected' : '' }}>{{ $d }}</option>
+                            @endforeach
+                        </select>
+                        @error('day') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+
+                    <!-- Time Section -->
+                    <div class="col-md-12">
+                        <label class="text-muted" style="font-weight: 500; margin-bottom: 5px; display: block;">Time</label>
+                        <div class="d-flex align-items-center justify-content-between" style="gap: 15px;">
+                            <div style="flex: 1;">
+                                <input type="time" name="start_time" class="form-control" value="{{ $startTime }}" required placeholder="Start Time" style="height: 45px;">
+                            </div>
+                            <div style="font-weight: bold; color: #666;">-</div>
+                            <div style="flex: 1;">
+                                <input type="time" name="end_time" class="form-control" value="{{ $endTime }}" required placeholder="End Time" style="height: 45px;">
+                            </div>
+                        </div>
+                        @error('start_time') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('end_time') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -75,10 +131,21 @@
                 </label>
             </div>
 
-            <div class=\"form-group button-group\">
-                <button type=\"submit\" class=\"btn btn-primary\"><i class=\"fas fa-save\"></i> Update Art Class</button>
-                <a href=\"{{ route('admin.artclasses.index') }}\" class=\"btn btn-secondary\"><i class=\"fas fa-times\"></i> Cancel</a>
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Art Class</button>
+                <a href="{{ route('admin.artclasses.index') }}" class="btn btn-secondary ml-2">Cancel</a>
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("input[type=time]", {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "H:i",
+                time_24hr: true
+            });
+        });
+    </script>
 </x-admin-layout>

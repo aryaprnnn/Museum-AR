@@ -31,12 +31,21 @@ class ArtClassController extends Controller
             'description' => 'required',
             'level' => 'required|in:pemula,menengah,lanjutan',
             'instructor' => 'nullable',
-            'schedule' => 'nullable',
+            // 'schedule' => 'nullable', // Replaced by below
+            'day' => 'required|string',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'quota' => 'required|integer',
             'available' => 'required|integer',
             'price' => 'required|numeric',
             'image' => 'nullable|image'
         ]);
+
+        // Construct schedule string
+        // Format: "Minggu, 13:00 - 15:00 WIB"
+        $schedule = $data['day'] . ', ' . $data['start_time'] . ' - ' . $data['end_time'] . ' WIB';
+        unset($data['day'], $data['start_time'], $data['end_time']);
+        $data['schedule'] = $schedule;
 
         $data['is_active'] = $request->has('is_active');
         $data['slug'] = $this->generateUniqueSlug($data['title'], 'art_classes');
@@ -63,12 +72,20 @@ class ArtClassController extends Controller
             'description' => 'required',
             'level' => 'required|in:pemula,menengah,lanjutan',
             'instructor' => 'nullable',
-            'schedule' => 'nullable',
+            // 'schedule' => 'nullable', // Replaced by below
+            'day' => 'required|string',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'quota' => 'required|integer',
             'available' => 'required|integer',
             'price' => 'required|numeric',
             'image' => 'nullable|image'
         ]);
+
+        // Construct schedule string
+        $schedule = $data['day'] . ', ' . $data['start_time'] . ' - ' . $data['end_time'] . ' WIB';
+        unset($data['day'], $data['start_time'], $data['end_time']);
+        $data['schedule'] = $schedule;
 
         $data['is_active'] = $request->has('is_active');
         $data['slug'] = $this->generateUniqueSlug($data['title'], 'art_classes', $artClass->id);

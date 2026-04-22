@@ -128,4 +128,5 @@ return [
         'cta_title' => 'Ready to explore our collection?',
         'cta_button' => 'Start Exploring Now',
     ],
+    'blog_back' => '← Back to Blog List',
 ];

@@ -32,12 +32,43 @@
                 @error('facilitator') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            @php
+                $schedule = old('schedule', $educationalProgram->schedule);
+                $dateVal = '';
+                $timeVal = '';
+                
+                if ($schedule) {
+                    try {
+                        $dt = \Carbon\Carbon::parse($schedule);
+                        $dateVal = $dt->format('Y-m-d');
+                        $timeVal = $dt->format('H:i');
+                    } catch (\Exception $e) {
+                        // Fallback or leave empty
+                    }
+                }
+                
+                if(old('date')) $dateVal = old('date');
+                if(old('time')) $timeVal = old('time');
+            @endphp
+            
             <div class="form-group">
-                <label>Schedule</label>
-                <!-- Use datetime-local for calendar popup -->
-                <input type="datetime-local" name="schedule" class="form-control" value="{{ old('schedule', $educationalProgram->schedule) }}">
-                <small class="text-muted">Previous: {{ $educationalProgram->schedule }} (Update if needed)</small>
-                @error('schedule') <span class="text-danger">{{ $message }}</span> @enderror
+                <label style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: block;">Schedule</label>
+                
+                <div class="row">
+                    <!-- Date Section -->
+                    <div class="col-md-12 mb-3">
+                        <label class="text-muted" style="font-weight: 500; margin-bottom: 5px; display: block;">Date</label>
+                        <input type="text" name="date" class="form-control flatpickr-date" value="{{ $dateVal }}" required placeholder="Select Date" style="height: 45px;">
+                        @error('date') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+
+                    <!-- Time Section -->
+                    <div class="col-md-12">
+                        <label class="text-muted" style="font-weight: 500; margin-bottom: 5px; display: block;">Time</label>
+                        <input type="text" name="time" class="form-control flatpickr-time" value="{{ $timeVal }}" required placeholder="Select Time" style="height: 45px; text-align: left;">
+                        @error('time') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -90,3 +121,19 @@
         </form>
     </div>
 </x-admin-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr(".flatpickr-date", {
+            dateFormat: "Y-m-d",
+            allowInput: true
+        });
+        
+        flatpickr(".flatpickr-time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
+    });
+</script>

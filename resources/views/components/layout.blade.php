@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Museum' }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,8 +16,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&display=swap" rel="stylesheet">
+    @stack('styles')
 </head>
-<body class="{{ isset($mainClass) && str_contains($mainClass, 'light-bg') ? 'light-body' : '' }} {{ isset($mainClass) && str_contains($mainClass, 'hide-navbar') ? 'hide-navbar-body' : '' }}">
+<body class="{{ $mainClass ?? '' }} {{ isset($mainClass) && str_contains($mainClass, 'light-bg') ? 'light-body' : '' }} {{ isset($mainClass) && str_contains($mainClass, 'hide-navbar') ? 'hide-navbar-body' : '' }}">
 
     {{-- INCLUDE NAVBAR COMPONENT --}}
     @if(!isset($mainClass) || !str_contains($mainClass, 'hide-navbar'))

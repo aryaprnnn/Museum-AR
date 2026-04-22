@@ -35,20 +35,49 @@
 
             <div class="form-group">
                 <label>Start Date</label>
-                <input type="date" name="start_date" class="form-control" value="{{ old('start_date', $exhibition->start_date) }}">
+                <input type="text" name="start_date" class="form-control flatpickr-date" value="{{ old('start_date', $exhibition->start_date) }}" placeholder="Select Start Date">
                 @error('start_date') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group">
                 <label>End Date</label>
-                <input type="date" name="end_date" class="form-control" value="{{ old('end_date', $exhibition->end_date) }}">
+                <input type="text" name="end_date" class="form-control flatpickr-date" value="{{ old('end_date', $exhibition->end_date) }}" placeholder="Select End Date">
                 @error('end_date') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            @php
+                $time = old('time', $exhibition->time);
+                $startTime = '';
+                $endTime = '';
+                if($time && str_contains($time, ' - ')) {
+                    $parts = explode(' - ', $time);
+                    $startTime = $parts[0] ?? '';
+                    $endTime = $parts[1] ?? '';
+                } elseif($time) {
+                     $startTime = $time; // Fallback
+                }
+                
+                if(old('start_time')) $startTime = old('start_time');
+                if(old('end_time')) $endTime = old('end_time');
+            @endphp
+
             <div class="form-group">
-                <label>Time</label>
-                <input type="text" name="time" class="form-control" value="{{ old('time', $exhibition->time) }}" placeholder="e.g., 09:00 - 17:00">
-                @error('time') <span class="text-danger">{{ $message }}</span> @enderror
+                <label style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: block;">Time</label>
+                <div class="row">
+                     <div class="col-md-12">
+                        <div class="d-flex align-items-center justify-content-between" style="gap: 15px;">
+                            <div style="flex: 1;">
+                                <input type="text" name="start_time" class="form-control flatpickr-time" value="{{ $startTime }}" required placeholder="Open Time" style="height: 45px; text-align: left;">
+                            </div>
+                            <div style="font-weight: bold; color: #666;">-</div>
+                            <div style="flex: 1;">
+                                <input type="text" name="end_time" class="form-control flatpickr-time" value="{{ $endTime }}" required placeholder="Close Time" style="height: 45px; text-align: left;">
+                            </div>
+                        </div>
+                        @error('start_time') <span class="text-danger">{{ $message }}</span> @enderror
+                        @error('end_time') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -88,3 +117,19 @@
         </form>
     </div>
 </x-admin-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr(".flatpickr-date", {
+            dateFormat: "Y-m-d",
+            allowInput: true
+        });
+        
+        flatpickr(".flatpickr-time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
+    });
+</script>

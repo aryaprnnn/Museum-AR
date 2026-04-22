@@ -1,4 +1,4 @@
-<x-layout title="Home">
+<x-layout title="Home" mainClass="home-page">
 
     {{-- Video Hero Section --}}
     <section id="video-section" style="height: calc(100vh - 55px); padding-top: 0; background: #000; display: flex; align-items: center; justify-content: center;">

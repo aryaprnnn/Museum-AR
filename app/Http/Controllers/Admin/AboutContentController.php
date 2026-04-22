@@ -50,13 +50,16 @@ class AboutContentController extends Controller
             ->with('success', 'Content created successfully!');
     }
 
-    public function edit(AboutContent $aboutContent)
+    public function edit($id)
     {
+        $aboutContent = AboutContent::withInactive()->findOrFail($id);
         return view('admin.about-contents.edit', compact('aboutContent'));
     }
 
-    public function update(Request $request, AboutContent $aboutContent)
+    public function update(Request $request, $id)
     {
+        $aboutContent = AboutContent::withInactive()->findOrFail($id);
+
         $request->validate([
             'section' => 'required|string|max:255',
             'title' => 'nullable|string|max:255',
@@ -84,8 +87,10 @@ class AboutContentController extends Controller
             ->with('success', 'Content updated successfully!');
     }
 
-    public function destroy(AboutContent $aboutContent)
+    public function destroy($id)
     {
+        $aboutContent = AboutContent::withInactive()->findOrFail($id);
+
         if ($aboutContent->image) {
             Storage::disk('public')->delete($aboutContent->image);
         }

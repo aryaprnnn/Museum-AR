@@ -175,4 +175,5 @@ return [
         'subtitle' => 'Masuki pameran bergantian yang menampilkan karya abadi dan suara kontemporer.',
         'cta' => 'Lihat Semua Pameran',
     ],
+    'blog_back' => 'Kembali ke Daftar Blog',
 ];

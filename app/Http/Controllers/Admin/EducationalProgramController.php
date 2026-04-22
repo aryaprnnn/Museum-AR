@@ -32,12 +32,20 @@ class EducationalProgramController extends Controller
             'type' => 'required|in:workshop,seminar',
             'price' => 'required|numeric|min:0',
             'facilitator' => 'nullable',
-            'schedule' => 'nullable',
+            'facilitator' => 'nullable',
+            // 'schedule' => 'nullable', 
+            'date' => 'required',
+            'time' => 'required',
+            'location' => 'nullable',
             'location' => 'nullable',
             'target_audience' => 'nullable',
             'benefits' => 'nullable',
             'image' => 'nullable|image'
         ]);
+
+        $schedule = $data['date'] . ' ' . $data['time'];
+        unset($data['date'], $data['time']);
+        $data['schedule'] = $schedule;
 
         $data['is_active'] = $request->has('is_active');
         $data['slug'] = $this->generateUniqueSlug($data['title'], 'educational_programs');
@@ -65,12 +73,20 @@ class EducationalProgramController extends Controller
             'type' => 'required|in:workshop,seminar',
             'price' => 'required|numeric|min:0',
             'facilitator' => 'nullable',
-            'schedule' => 'nullable',
+            'facilitator' => 'nullable',
+            // 'schedule' => 'nullable',
+            'date' => 'required',
+            'time' => 'required',
+            'location' => 'nullable',
             'location' => 'nullable',
             'target_audience' => 'nullable',
             'benefits' => 'nullable',
             'image' => 'nullable|image'
         ]);
+
+        $schedule = $data['date'] . ' ' . $data['time'];
+        unset($data['date'], $data['time']);
+        $data['schedule'] = $schedule;
 
         $data['is_active'] = $request->has('is_active');
         $data['slug'] = $this->generateUniqueSlug($data['title'], 'educational_programs', $educationalProgram->id);

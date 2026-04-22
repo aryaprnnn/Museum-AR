@@ -1,71 +1,541 @@
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f5f5f5;display:flex;min-height:100vh;opacity:0;transition:opacity 0.2s ease}
-.sidebar{width:260px;background:#1a1a1a;color:#fff;position:fixed;height:100vh;overflow-y:auto;transition:right 0.3s ease;z-index:999;right:-260px;top:0}
-.sidebar.collapsed{right:-260px}
-.sidebar.expanded{right:0}
-.sidebar-header{padding:24px 20px;border-bottom:1px solid #333;display:flex;justify-content:space-between;align-items:center}
-.sidebar-header h2{font-size:1.3rem;margin:0}
-.sidebar-toggle{background:none;border:none;color:#fff;cursor:pointer;font-size:1.2rem}
-.sidebar-menu{list-style:none;padding:20px 0}
-.sidebar-menu li a{display:block;padding:12px 20px;color:#ccc;text-decoration:none;transition:all 0.2s}
-.sidebar-menu li a:hover,.sidebar-menu li a.active{background:#333;color:#fff}
-.sidebar-menu li a i{margin-right:10px;width:20px}
-.main-content{padding:30px;width:100%;transition:all 0.3s ease}
-.top-bar{background:#fff;padding:16px 24px;margin:-30px -30px 30px -30px;box-shadow:0 2px 4px rgba(0,0,0,0.1);display:flex;justify-content:space-between;align-items:center}
-.top-bar h1{font-size:1.5rem}
-.top-bar-controls{display:flex;gap:16px;align-items:center}
-.btn{display:inline-block;padding:10px 16px;background:#000;color:#fff;text-decoration:none;border-radius:4px;border:none;cursor:pointer;transition:all 0.3s;font-size:0.9rem;font-family:inherit}
-.btn:hover{background:#333;transform:translateY(-1px)}
-.btn-primary{background:#000;color:#fff}
-.btn-primary:hover{background:#333}
-.btn-secondary{background:#6c757d;color:#fff}
-.btn-secondary:hover{background:#5a6268}
-.btn-danger{background:#dc3545;color:#fff}
-.btn-danger:hover{background:#c82333}
-.btn-sm{padding:6px 12px;font-size:0.85rem}
-.btn-sm-danger{padding:6px 12px;font-size:0.85rem;background:#dc3545;color:#fff;border:none;border-radius:4px;cursor:pointer}
-.btn-sm-danger:hover{background:#c82333}
-.card{background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);padding:24px;margin-bottom:20px}
-.table-container{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
-table th,table td{padding:12px;text-align:left;border-bottom:1px solid #ddd}
-table th{background:#f8f9fa;font-weight:600}
-.form-group{margin-bottom:16px}
-.form-group label{display:block;margin-bottom:6px;font-weight:500}
-.form-group input[type="text"],.form-group input[type="email"],.form-group input[type="password"],.form-group input[type="date"],.form-group input[type="file"],.form-group textarea,.form-group select{width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;font-size:1rem;font-family:inherit}
-.form-group input[type="checkbox"]{width:auto;margin-right:8px;cursor:pointer}
-.form-group label input[type="checkbox"]{display:inline-block}
-.form-group textarea{min-height:120px;resize:vertical}
-.form-group.button-group{margin-top:24px;border-top:1px solid #eee;padding-top:20px}
-.search-box{max-width:400px;display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #ddd;border-radius:4px;padding:4px 12px}
-.search-box input{flex:1;padding:8px 8px;border:none;border-radius:4px;font-size:0.9rem;outline:none}
-.search-box input::placeholder{color:#999}
-.alert{padding:12px 16px;margin-bottom:20px;border-radius:4px;border-left:4px solid}
-.alert-success{background:#d4edda;color:#155724;border-left-color:#28a745}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:20px;margin-bottom:30px}
-.stat-card{background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-.stat-card h3{font-size:0.9rem;color:#666;margin-bottom:8px}
-.stat-card p{font-size:2rem;font-weight:600;color:#000}
-.button-group{display:flex;gap:8px;flex-wrap:wrap}
+/* Import Google Fonts handled in layout for performance */
 
-/* Responsive adjustments */
-@media (max-width: 992px){
-	.top-bar{flex-direction:column;align-items:flex-start;gap:12px}
-	.top-bar h1{font-size:1.25rem}
-	.main-content{padding:20px}
+:root {
+	--primary-dark: #000000;
+	--primary-light: #FFF0DC;
+	--accent-gold: #F0BB78;
+	--text-dark: #1a1a1a;
+	--text-light: #ffffff;
+	--border-color: #000000;
+	--input-border: #ccc;
+	--success-bg: #d4edda;
+	--success-text: #155724;
+	--danger-bg: #dc3545;
+	--danger-text: #fff;
+	--sidebar-width: 260px;
 }
 
-@media (max-width: 768px){
-	.sidebar{width:240px}
-	.top-bar{margin:-20px -20px 20px -20px;padding:12px 16px}
-	.stats-grid{grid-template-columns:1fr}
-	table th, table td{padding:10px}
-	.search-box{width:100%}
-	.table-container{overflow-x:auto}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-@media (max-width: 480px){
-	.btn{padding:8px 12px;font-size:0.85rem}
-	.btn-group .btn{padding:6px 10px}
-	.top-bar-controls{width:100%;display:flex;justify-content:space-between;gap:8px}
+body {
+	font-family: 'Inria Serif', serif;
+	background-color: var(--primary-light);
+	color: var(--text-dark);
+	display: flex;
+	min-height: 100vh;
+	opacity: 1;
+	transition: opacity 0.2s ease;
+}
+
+/* Sidebar */
+.sidebar {
+	width: var(--sidebar-width);
+	background-color: var(--primary-dark);
+	color: var(--text-light);
+	position: fixed;
+	height: 100vh;
+	overflow-y: auto;
+	transition: left 0.3s ease;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+	border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar.collapsed {
+	left: calc(var(--sidebar-width) * -1);
+}
+
+.sidebar.expanded {
+	left: 0;
+}
+
+.sidebar-header {
+	padding: 24px 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.sidebar-header h2 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 0;
+	font-family: 'Inria Serif', serif;
+}
+
+.sidebar-toggle {
+	background: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-size: 1.2rem;
+}
+
+.sidebar-menu {
+	list-style: none;
+	padding: 20px 0;
+}
+
+.sidebar-menu li a {
+	display: block;
+	padding: 12px 20px;
+	color: #ccc;
+	text-decoration: none;
+	transition: all 0.2s;
+	font-weight: 500;
+	font-family: 'Lexend', sans-serif;
+	/* Use Lexend for menu items for readability */
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active {
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+	border-left: 4px solid var(--accent-gold);
+}
+
+.sidebar-menu li a i {
+	margin-right: 10px;
+	width: 20px;
+	text-align: center;
+}
+
+/* Main Content */
+.main-content {
+	flex: 1;
+	margin-left: var(--sidebar-width);
+	padding: 30px;
+	transition: margin-left 0.3s ease;
+	width: calc(100% - var(--sidebar-width));
+}
+
+/* Logic: if sidebar has class collapsed, main-content needs to expand. 
+   BUT CSS selector can't select sibling based on sibling class easily without :has.
+   Instead, usually JS toggles class on BODY or we use sibling selector if sidebar is before main.
+   Sidebar IS before main.
+*/
+.sidebar.collapsed+.main-content {
+	margin-left: 0;
+	width: 100%;
+}
+
+/* Top Bar */
+.top-bar {
+	background: var(--primary-light);
+	padding: 16px 0;
+	margin-bottom: 30px;
+	border-bottom: 2px solid var(--primary-dark);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.top-bar h1 {
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--primary-dark);
+}
+
+.top-bar-controls {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
+/* Cards */
+.card {
+	background: #ffffff;
+	border-radius: 8px;
+	padding: 24px;
+	margin-bottom: 20px;
+	border: 2px solid var(--primary-dark);
+	box-shadow: 4px 4px 0px var(--primary-dark);
+}
+
+/* Stats Grid */
+.stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 20px;
+	margin-bottom: 30px;
+}
+
+.stat-card {
+	background: var(--accent-gold);
+	padding: 20px;
+	border-radius: 8px;
+	border: 2px solid var(--primary-dark);
+	box-shadow: 4px 4px 0px var(--primary-dark);
+	color: var(--primary-dark);
+}
+
+.stat-card h3 {
+	font-size: 1rem;
+	font-weight: 600;
+	margin-bottom: 8px;
+	opacity: 0.9;
+	font-family: 'Lexend', sans-serif;
+}
+
+.stat-card p {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin: 0;
+}
+
+/* Forms */
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: var(--primary-dark);
+	font-family: 'Lexend', sans-serif;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="date"],
+.form-group input[type="datetime-local"],
+.form-group input[type="time"],
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group textarea,
+.form-group select {
+	width: 100%;
+	padding: 12px;
+	border: 2px solid #ccc;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-family: 'Lexend', sans-serif;
+	/* Better for inputs */
+	background: #fff;
+	transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+	border-color: var(--primary-dark);
+	outline: none;
+}
+
+/* Buttons */
+.btn {
+	display: inline-block;
+	padding: 12px 24px;
+	background-color: var(--primary-dark);
+	color: var(--text-light);
+	text-decoration: none;
+	border-radius: 8px;
+	font-weight: bold;
+	text-align: center;
+	border: 2px solid var(--primary-dark);
+	cursor: pointer;
+	transition: 0.3s;
+	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+	font-family: 'Inria Serif', serif;
+}
+
+.btn:hover {
+	background-color: #543A14;
+	color: #ffffff;
+	border-color: #543A14;
+	transform: translateY(-2px);
+}
+
+.btn-secondary {
+	background-color: #f0f0f0;
+	color: var(--primary-dark);
+	border-color: var(--primary-dark);
+}
+
+.btn-secondary:hover {
+	background-color: #e0e0e0;
+	color: var(--primary-dark);
+	border-color: var(--primary-dark);
+}
+
+.btn-danger {
+	background-color: var(--danger-bg);
+	border-color: var(--danger-bg);
+}
+
+.btn-sm {
+	padding: 6px 12px;
+	font-size: 0.85rem;
+}
+
+.btn-sm-danger {
+	padding: 6px 12px;
+	font-size: 0.85rem;
+	background: var(--danger-bg);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* Tables */
+.table-container {
+	overflow-x: auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+table th,
+table td {
+	padding: 16px;
+	text-align: left;
+	border-bottom: 1px solid #eee;
+}
+
+table th {
+	background: rgba(0, 0, 0, 0.05);
+	font-weight: 700;
+	color: var(--primary-dark);
+}
+
+/* Utility */
+.text-danger {
+	color: var(--danger-bg);
+	font-size: 0.9rem;
+	margin-top: 5px;
+	display: block;
+}
+
+.text-muted {
+	color: #666;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.align-items-center {
+	align-items: center;
+}
+
+.justify-content-between {
+	justify-content: space-between;
+}
+
+.mb-3 {
+	margin-bottom: 1rem;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -10px;
+}
+
+.col-md-12 {
+	width: 100%;
+	padding: 0 10px;
+}
+
+.col-md-4 {
+	width: 33.33%;
+	padding: 0 10px;
+}
+
+.col-md-3 {
+	width: 25%;
+	padding: 0 10px;
+}
+
+.col-md-1 {
+	width: 8.33%;
+	padding: 0 10px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+
+	/* Mobile Sidebar Logic */
+	.sidebar {
+		left: -260px;
+		/* Hidden by default on mobile */
+		width: 260px;
+		transition: left 0.3s ease;
+		box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
+		/* Shadow for overlay feel */
+		z-index: 2000;
+		/* Higher z-index to stay on top */
+	}
+
+	/* When 'collapsed' CLASS is REMOVED, it means it is OPEN. 
+       But wait, the JS logic toggles 'collapsed'.
+       
+       Let's rethink:
+       Desktop: 
+       - Default: Open (left: 0)
+       - Collapsed: Closed (left: -260px)
+       
+       Mobile:
+       - Default: Closed (left: -260px)
+       - Open: Open (left: 0)
+       
+       We need a dedicated class for mobile open state OR invert the logic for mobile.
+       Easiest approach with current JS (which toggles 'collapsed'):
+       
+       Current JS: sidebar.classList.toggle('collapsed');
+       
+       If we rely on 'collapsed' class:
+       - Desktop: 'collapsed' means hidden.
+       - Mobile: 'collapsed' means... hidden?
+       
+       Problem: User wants mobile default closed. 
+       If HTML doesn't have 'collapsed' class, Desktop is Open.
+       If HTML doesn't have 'collapsed' class, Mobile should be Closed.
+       
+       Solution: 
+       @media (max-width: 992px) {
+           .sidebar { left: -260px; }
+           .sidebar.collapsed { left: 0; } <--- Invert meaning for mobile? No that's confusing.
+           
+           Better: Add a new class 'mobile-open' via JS? 
+           Or simpler: 
+           .sidebar { transform: translateX(-100%); }
+           .sidebar.mobile-open { transform: translateX(0); }
+           
+           BUT I can't easily change JS logic without checking desktop state.
+           
+           Let's stick to CSS only if possible.
+           
+           If I make .sidebar left: -260px on mobile.
+           And .sidebar.open-mobile { left: 0; }
+           
+           the JS 'toggleSidebar' needs to be smart.
+       */
+
+	/* REVISED PLAN FOR CSS & JS COOPERATION */
+	/* I will update JS to toggle 'mobile-open' on mobile screens, and 'collapsed' on desktop. */
+
+	.sidebar {
+		left: -260px;
+	}
+
+	.sidebar.mobile-open {
+		left: 0;
+	}
+
+	/* Main Content spans full width on mobile */
+	.main-content {
+		margin-left: 0;
+		width: 100%;
+		padding: 15px;
+		/* Smaller padding */
+		overflow-x: hidden;
+		/* Prevent horizontal scroll on body */
+	}
+
+	.card {
+		padding: 15px;
+		/* Smaller padding on mobile */
+		max-width: 100%;
+	}
+
+	/* Top Bar adjustments */
+	.top-bar {
+		flex-direction: row;
+		/* Keep row for hamburger + title */
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 20px;
+	}
+
+	/* Enhanced Mobile Toggle Button */
+	.top-bar .sidebar-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		background-color: var(--primary-dark);
+		/* Black background */
+		color: var(--accent-gold);
+		/* Gold icon */
+		border: 2px solid var(--primary-dark);
+		border-radius: 8px;
+		cursor: pointer;
+		font-size: 1.2rem;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.top-bar .sidebar-toggle:hover {
+		background-color: var(--accent-gold);
+		color: var(--primary-dark);
+		border-color: var(--primary-dark);
+		transform: translateY(-2px);
+	}
+
+	.top-bar h1 {
+		font-size: 1.5rem;
+	}
+
+	.top-bar-controls span {
+		display: none;
+		/* Hide 'Welcome User' text on small mobile */
+	}
+
+	/* Stats Grid 1 column */
+	.stats-grid {
+		grid-template-columns: 1fr;
+	}
+
+	/* Table scrolling */
+	.table-container {
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		border: 1px solid #ccc;
+		/* Visual cue for scrolling container */
+		border-radius: 4px;
+		margin-bottom: 10px;
+	}
+
+	table {
+		width: 100%;
+		min-width: 600px;
+		/* Force minimum width to trigger scroll */
+	}
+
+	/* Overlay Backdrop (Optional but good for UX) */
+	.sidebar-overlay {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 1000;
+		/* Below sidebar, above content */
+	}
+
+	.sidebar.mobile-open+.sidebar-overlay {
+		display: block;
+	}
 }

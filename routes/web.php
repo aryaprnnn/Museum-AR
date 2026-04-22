@@ -237,7 +237,12 @@ Route::get('/user/bookings', [UserBookingController::class, 'bookings'])->name('
 Route::view('/user/settings', 'front.pages.user.settings')->name('user.settings');
 Route::post('/user/settings/update', [UserProfileController::class, 'updateProfile'])->name('user.settings.update');
 Route::get('/user/booking/{code}', function($code){
-    return view('front.pages.user.booking-detail', compact('code'));
+    $booking = \App\Models\Booking::where('booking_code', $code)
+                ->with('bookable')
+                ->where('user_id', session('auth_user')['id'])
+                ->firstOrFail();
+    
+    return view('front.pages.user.booking-detail', compact('booking', 'code'));
 })->name('user.booking.detail');
 Route::get('/user/educational/{code}', function($code){
     $booking = \App\Models\Booking::where('booking_code', $code)
